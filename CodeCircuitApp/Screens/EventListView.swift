@@ -9,7 +9,14 @@ import SwiftUI
 
 struct EventListView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List {
+                ForEach(Event.mockEvents) { event in
+                    EventCardView(event: event)
+                }
+            }
+            .navigationTitle("Events")
+        }
     }
 }
 
