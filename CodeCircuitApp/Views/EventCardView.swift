@@ -12,7 +12,7 @@ struct EventCardView: View {
     
     var body: some View {
         HStack {
-            Image("placeholder-event-image")
+            Image(.placeholderEvent)
                 .resizable()
                 .frame(width: 50, height: 50)
             VStack(alignment: .leading) {

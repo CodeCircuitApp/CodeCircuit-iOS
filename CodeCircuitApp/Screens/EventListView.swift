@@ -12,8 +12,13 @@ struct EventListView: View {
         NavigationStack {
             List {
                 ForEach(Event.mockEvents) { event in
-                    EventCardView(event: event)
+                    NavigationLink(value: event) {
+                        EventCardView(event: event)
+                    }
                 }
+            }
+            .navigationDestination(for: Event.self) { event in
+                EventView(event: event)
             }
             .navigationTitle("Events")
         }
