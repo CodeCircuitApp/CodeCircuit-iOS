@@ -52,15 +52,23 @@ struct EventView: View {
                     )
                     .frame(height: 250)
                 HStack {
-                    Text(event.name)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .padding()
-                        .foregroundStyle(.white)
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Text("\(event.eventType.rawValue.lowercased()) · \(event.eventLocationType.rawValue.lowercased()) · \(event.entryFee == 0 ? "free" : "paid")")
+                                .font(.callout)
+                            Spacer()
+                        }
+                        Text(event.name)
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.leading)
+                    }
                     Spacer()
                 }
+                .padding()
             }
         }
+        .foregroundStyle(.white)
         .frame(height: 500)
     }
     
@@ -123,4 +131,8 @@ struct EventView: View {
             }
             .navigationTitle("Preview Home")
     }
+}
+
+#Preview {
+    EventView(event: Event.mockEvents.first!)
 }
