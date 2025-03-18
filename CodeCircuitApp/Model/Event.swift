@@ -55,12 +55,11 @@ struct Event: Identifiable, Hashable {
     }
     
     enum EducationStatus: String, CaseIterable {
-        case none = "None"
+        case nonStudent = "Non-Student"
         case primarySchoolStudent = "Primary School Student"
         case secondarySchoolStudent = "Secondary School Student"
         case higherEducationStudent = "Higher Education Student"
         case postGraduate = "Post-Graduate"
-        case employedProfessional = "Employed Professional"
     }
     
     enum SkillLevel: String, CaseIterable {
@@ -110,7 +109,7 @@ extension Event {
             email: "info@dskrakow.com",
             imageURL: URL(string: "https://via.placeholder.com/800x400/3F51B5/FFFFFF?Text=Kraków%20Data%20Sci")!,
             logo: URL(string: "https://via.placeholder.com/100x100/3F51B5/FFFFFF?Text=DSK")!,
-            educationStatus: [.higherEducationStudent, .postGraduate, .none],
+            educationStatus: [.higherEducationStudent, .postGraduate, .nonStudent],
             minimumAge: 18,
             maximumAge: nil
         ),
@@ -152,7 +151,7 @@ extension Event {
             email: "challenge@securewro.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/F44336/FFFFFF?Text=Wrocław%20Cyber")!,
             logo: URL(string: "https://via.placeholder.com/100x100/F44336/FFFFFF?Text=SW")!,
-            educationStatus: [.higherEducationStudent, .postGraduate, .employedProfessional],
+            educationStatus: [.higherEducationStudent, .postGraduate, .nonStudent],
             minimumAge: 18,
             maximumAge: nil
         ),
@@ -173,7 +172,7 @@ extension Event {
             email: "workshops@mobilepoznan.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/00BCD4/FFFFFF?Text=Poznań%20Mobile%20Lab")!,
             logo: URL(string: "https://via.placeholder.com/100x100/00BCD4/FFFFFF?Text=MP")!,
-            educationStatus: [.secondarySchoolStudent, .higherEducationStudent, .employedProfessional],
+            educationStatus: [.secondarySchoolStudent, .higherEducationStudent, .nonStudent],
             minimumAge: 16,
             maximumAge: nil
         ),
@@ -194,7 +193,7 @@ extension Event {
             email: "expo@techcoastgdansk.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/673AB7/FFFFFF?Text=Gdańsk%20AI%20Expo")!,
             logo: URL(string: "https://via.placeholder.com/100x100/673AB7/FFFFFF?Text=TCG")!,
-            educationStatus: [.none, .secondarySchoolStudent, .higherEducationStudent, .postGraduate, .employedProfessional],
+            educationStatus: [.nonStudent, .secondarySchoolStudent, .higherEducationStudent, .postGraduate, .nonStudent],
             minimumAge: 15,
             maximumAge: nil
         ),
@@ -215,7 +214,7 @@ extension Event {
             email: "weekend@startupszczecin.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/FFC107/000000?Text=Szczecin%20Startup")!,
             logo: URL(string: "https://via.placeholder.com/100x100/FFC107/000000?Text=SS")!,
-            educationStatus: [.none, .secondarySchoolStudent, .higherEducationStudent, .postGraduate, .employedProfessional],
+            educationStatus: [.nonStudent, .secondarySchoolStudent, .higherEducationStudent, .postGraduate, .nonStudent],
             minimumAge: 16,
             maximumAge: nil
         ),
@@ -236,7 +235,7 @@ extension Event {
             email: "forum@cloudlublin.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/03A9F4/FFFFFF?Text=Lublin%20Cloud%20Forum")!,
             logo: URL(string: "https://via.placeholder.com/100x100/03A9F4/FFFFFF?Text=CL")!,
-            educationStatus: [.higherEducationStudent, .postGraduate, .employedProfessional],
+            educationStatus: [.higherEducationStudent, .postGraduate, .nonStudent],
             minimumAge: 18,
             maximumAge: nil
         ),
@@ -278,7 +277,7 @@ extension Event {
             email: "meetup@frontendrzeszow.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/E91E63/FFFFFF?Text=Rzeszów%20Frontend")!,
             logo: URL(string: "https://via.placeholder.com/100x100/E91E63/FFFFFF?Text=FR")!,
-            educationStatus: [.none, .secondarySchoolStudent, .higherEducationStudent, .postGraduate, .employedProfessional],
+            educationStatus: [.nonStudent, .secondarySchoolStudent, .higherEducationStudent, .postGraduate, .nonStudent],
             minimumAge: 15,
             maximumAge: nil
         )
