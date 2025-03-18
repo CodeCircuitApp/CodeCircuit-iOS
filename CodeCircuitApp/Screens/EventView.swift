@@ -93,6 +93,7 @@ struct EventView: View {
     var actionButtons: some View {
         HStack {
             EventActionButton(systemName: "safari", text: "Website", action: { openWebsite(url: event.website) })
+            EventActionButton(systemName: "envelope", text: "E-mail", action: { print("Call") })
             EventActionButton(systemName: "square.and.arrow.up", text: "Share", action: { print("Call") })
         }
     }
