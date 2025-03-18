@@ -22,12 +22,13 @@ struct Event: Identifiable, Hashable {
     let prizePool: Double
     let entryFee: Double
     let currency: Currency
+    let skillLevel: SkillLevel
     
     
     // MARK: - Organizer information
     
     let organizer: String
-    let website: String
+    let website: URL
     let email: String
     let imageURL: URL
     let logo: URL
@@ -37,7 +38,6 @@ struct Event: Identifiable, Hashable {
     let educationStatus: [EducationStatus]
     let minimumAge: Int
     let maximumAge: Int?
-    let skillLevel: SkillLevel
     
     // MARK: - Enums
     
@@ -83,15 +83,15 @@ extension Event {
             prizePool: 8000.00,
             entryFee: 30.00,
             currency: .pln,
+            skillLevel: .intermediate,
             organizer: "Code Poland",
-            website: "https://codepoland.pl",
+            website: URL(string:"https://codepoland.pl")!,
             email: "warsaw@codepoland.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/4CAF50/FFFFFF?Text=Warsaw%20Web%20Dev")!,
             logo: URL(string: "https://via.placeholder.com/100x100/4CAF50/FFFFFF?Text=CP")!,
             educationStatus: [.higherEducationStudent, .postGraduate, .secondarySchoolStudent],
             minimumAge: 17,
-            maximumAge: nil,
-            skillLevel: .intermediate
+            maximumAge: nil
         ),
         Event(
             name: "Kraków Data Science Summit",
@@ -104,15 +104,15 @@ extension Event {
             prizePool: 0.00,
             entryFee: 299.00,
             currency: .pln,
+            skillLevel: .advanced,
             organizer: "Data Science Kraków",
-            website: "https://dskrakow.com",
+            website: URL(string:"https://dskrakow.com")!,
             email: "info@dskrakow.com",
             imageURL: URL(string: "https://via.placeholder.com/800x400/3F51B5/FFFFFF?Text=Kraków%20Data%20Sci")!,
             logo: URL(string: "https://via.placeholder.com/100x100/3F51B5/FFFFFF?Text=DSK")!,
             educationStatus: [.higherEducationStudent, .postGraduate, .none],
             minimumAge: 18,
-            maximumAge: nil,
-            skillLevel: .advanced
+            maximumAge: nil
         ),
         Event(
             name: "Łódź Game Development Jam",
@@ -125,15 +125,15 @@ extension Event {
             prizePool: 5000.00,
             entryFee: 20.00,
             currency: .pln,
+            skillLevel: .beginner,
             organizer: "GameDev Łódź",
-            website: "https://gamedevlodz.pl",
+            website: URL(string: "https://gamedevlodz.pl")!,
             email: "jam@gamedevlodz.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/9C27B0/FFFFFF?Text=Łódź%20Game%20Jam")!,
             logo: URL(string: "https://via.placeholder.com/100x100/9C27B0/FFFFFF?Text=GDL")!,
             educationStatus: [.secondarySchoolStudent, .higherEducationStudent, .postGraduate],
             minimumAge: 16,
-            maximumAge: nil,
-            skillLevel: .beginner
+            maximumAge: nil
         ),
         Event(
             name: "Wrocław Cybersecurity Challenge",
@@ -146,15 +146,15 @@ extension Event {
             prizePool: 7000.00,
             entryFee: 40.00,
             currency: .pln,
+            skillLevel: .advanced,
             organizer: "SecureWro",
-            website: "https://securewro.pl",
+            website: URL(string: "https://securewro.pl")!,
             email: "challenge@securewro.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/F44336/FFFFFF?Text=Wrocław%20Cyber")!,
             logo: URL(string: "https://via.placeholder.com/100x100/F44336/FFFFFF?Text=SW")!,
             educationStatus: [.higherEducationStudent, .postGraduate, .employedProfessional],
             minimumAge: 18,
-            maximumAge: nil,
-            skillLevel: .advanced
+            maximumAge: nil
         ),
         Event(
             name: "Poznań Mobile Innovation Lab",
@@ -167,15 +167,15 @@ extension Event {
             prizePool: 0.00,
             entryFee: 79.99,
             currency: .pln,
+            skillLevel: .intermediate,
             organizer: "Mobile Poznań",
-            website: "https://mobilepoznan.pl",
+            website: URL(string: "https://mobilepoznan.pl")!,
             email: "workshops@mobilepoznan.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/00BCD4/FFFFFF?Text=Poznań%20Mobile%20Lab")!,
             logo: URL(string: "https://via.placeholder.com/100x100/00BCD4/FFFFFF?Text=MP")!,
             educationStatus: [.secondarySchoolStudent, .higherEducationStudent, .employedProfessional],
             minimumAge: 16,
-            maximumAge: nil,
-            skillLevel: .intermediate
+            maximumAge: nil
         ),
         Event(
             name: "Gdańsk AI and Robotics Expo",
@@ -188,15 +188,15 @@ extension Event {
             prizePool: 0.00,
             entryFee: 149.00,
             currency: .pln,
+            skillLevel: .beginner,
             organizer: "Tech Coast Gdańsk",
-            website: "https://techcoastgdansk.pl",
+            website: URL(string: "https://techcoastgdansk.pl")!,
             email: "expo@techcoastgdansk.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/673AB7/FFFFFF?Text=Gdańsk%20AI%20Expo")!,
             logo: URL(string: "https://via.placeholder.com/100x100/673AB7/FFFFFF?Text=TCG")!,
             educationStatus: [.none, .secondarySchoolStudent, .higherEducationStudent, .postGraduate, .employedProfessional],
             minimumAge: 15,
-            maximumAge: nil,
-            skillLevel: .beginner
+            maximumAge: nil
         ),
         Event(
             name: "Szczecin Startup Weekend",
@@ -209,15 +209,15 @@ extension Event {
             prizePool: 3000.00,
             entryFee: 60.00,
             currency: .pln,
+            skillLevel: .beginner,
             organizer: "Startup Szczecin",
-            website: "https://startupszczecin.pl",
+            website: URL(string: "https://startupszczecin.pl")!,
             email: "weekend@startupszczecin.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/FFC107/000000?Text=Szczecin%20Startup")!,
             logo: URL(string: "https://via.placeholder.com/100x100/FFC107/000000?Text=SS")!,
             educationStatus: [.none, .secondarySchoolStudent, .higherEducationStudent, .postGraduate, .employedProfessional],
             minimumAge: 16,
-            maximumAge: nil,
-            skillLevel: .beginner
+            maximumAge: nil
         ),
         Event(
             name: "Lublin Cloud Technologies Forum",
@@ -230,15 +230,15 @@ extension Event {
             prizePool: 0.00,
             entryFee: 179.00,
             currency: .pln,
+            skillLevel: .intermediate,
             organizer: "Cloud Lublin",
-            website: "https://cloudlublin.pl",
+            website: URL(string: "https://cloudlublin.pl")!,
             email: "forum@cloudlublin.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/03A9F4/FFFFFF?Text=Lublin%20Cloud%20Forum")!,
             logo: URL(string: "https://via.placeholder.com/100x100/03A9F4/FFFFFF?Text=CL")!,
             educationStatus: [.higherEducationStudent, .postGraduate, .employedProfessional],
             minimumAge: 18,
-            maximumAge: nil,
-            skillLevel: .intermediate
+            maximumAge: nil
         ),
         Event(
             name: "Bydgoszcz IoT Innovation Challenge",
@@ -251,15 +251,15 @@ extension Event {
             prizePool: 6000.00,
             entryFee: 25.00,
             currency: .pln,
+            skillLevel: .intermediate,
             organizer: "IoT Bydgoszcz",
-            website: "https://iotbydgoszcz.pl",
+            website: URL(string: "https://iotbydgoszcz.pl")!,
             email: "challenge@iotbydgoszcz.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/795548/FFFFFF?Text=Bydgoszcz%20IoT")!,
             logo: URL(string: "https://via.placeholder.com/100x100/795548/FFFFFF?Text=IB")!,
             educationStatus: [.secondarySchoolStudent, .higherEducationStudent, .postGraduate],
             minimumAge: 16,
-            maximumAge: nil,
-            skillLevel: .intermediate
+            maximumAge: nil
         ),
         Event(
             name: "Rzeszów Future of Frontend Meetup",
@@ -272,15 +272,15 @@ extension Event {
             prizePool: 0.00,
             entryFee: 0.00,
             currency: .pln,
+            skillLevel: .intermediate,
             organizer: "Frontend Rzeszów",
-            website: "https://frontendrzeszow.pl",
+            website: URL(string: "https://frontendrzeszow.pl")!,
             email: "meetup@frontendrzeszow.pl",
             imageURL: URL(string: "https://via.placeholder.com/800x400/E91E63/FFFFFF?Text=Rzeszów%20Frontend")!,
             logo: URL(string: "https://via.placeholder.com/100x100/E91E63/FFFFFF?Text=FR")!,
             educationStatus: [.none, .secondarySchoolStudent, .higherEducationStudent, .postGraduate, .employedProfessional],
             minimumAge: 15,
-            maximumAge: nil,
-            skillLevel: .intermediate
+            maximumAge: nil
         )
     ]
 }
