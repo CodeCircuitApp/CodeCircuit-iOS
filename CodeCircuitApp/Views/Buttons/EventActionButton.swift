@@ -18,11 +18,11 @@ struct EventActionButton: View {
         } label: {
             VStack(spacing: 4) {
                 Image(systemName: systemName)
-                    .font(.title2)
+                    .font(.title3)
                 Text(text)
+                    .font(.system(size: 16))
             }
-            .frame(minWidth: 60)
-            .padding(4)
+            .frame(width: 60, height: 50)
         }
         .buttonStyle(.bordered)
     }
