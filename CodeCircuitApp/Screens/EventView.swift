@@ -22,6 +22,7 @@ struct EventView: View {
                     .multilineTextAlignment(.leading)
                 actionButtons
                 details
+                eligibilityCriteria
                 Spacer()
             }
             .padding(.bottom, 72.0)
@@ -115,9 +116,29 @@ struct EventView: View {
                 EventDetailCell(label: "Entry Fee", text: entryFeeValue)
                 EventDetailCell(label: "Prize Pool", text: prizePoolValue)
                 EventDetailCell(label: "Duration", text: durationValue)
-                EventDetailCell(label: "Skill Level", text: "Beginners")
-                EventDetailCell(label: "Format", text: "Local")
+                EventDetailCell(label: "Skill Level", text: event.skillLevel.rawValue)
+                EventDetailCell(label: "Format", text: event.eventType.rawValue)
             }
+        }
+        .padding()
+    }
+    
+    @ViewBuilder
+    var eligibilityCriteria: some View {
+        let educationEligibilityLabel = EligibilityLabel.getEligibleLabel(from: event.educationStatus)
+        let educationIneligibilityLabel = EligibilityLabel.getIneligibleLabel(excluding: event.educationStatus)
+        let ageEligibilityLabel = EligibilityLabel.getEligibleLabel(minimumAge: event.minimumAge, maximumAge: event.maximumAge)
+        let ageIneligbilityLabel = EligibilityLabel.getIneligibleLabel(minimumAge: event.minimumAge, maximumAge: event.maximumAge)
+        
+        VStack(spacing: 8) {
+            HStack {
+                Text("Eligbility Criteria")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                Spacer()
+            }
+            EligibilityCriteriaView(criteriaLabel: "Education Status", eligibleLabel: educationEligibilityLabel, ineligibleLabel: educationIneligibilityLabel)
+            EligibilityCriteriaView(criteriaLabel: "Age Requirements", eligibleLabel: ageEligibilityLabel, ineligibleLabel: ageIneligbilityLabel)
         }
         .padding()
     }
