@@ -11,16 +11,27 @@ struct EventCardView: View {
     let event: Event
     
     var body: some View {
-        HStack {
-            Image(.placeholderEvent)
-                .resizable()
-                .frame(width: 50, height: 50)
-            VStack(alignment: .leading) {
-                Text(event.name)
-                    .font(.headline)
-                Text(event.description)
-                    .font(.subheadline)
+        VStack {
+            HStack {
+                Image(.placeholderEvent)
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .padding(4)
+                VStack(alignment: .leading) {
+                    Text(event.name)
+                        .font(.headline)
+                    Text(event.description)
+                        .font(.subheadline)
+                }
+                .lineLimit(2)
             }
+            HStack {
+                Text("\(event.organizer) · \(event.eventType.rawValue) · \(event.eventLocationType.rawValue)")
+                    .foregroundColor(.gray) // Optional: Style the dots and text together
+                Spacer()
+            }
+            .padding(.vertical)
+            .font(.footnote)
             .lineLimit(1)
         }
     }

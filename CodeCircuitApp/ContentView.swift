@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            Tab("Events", systemImage: "backpack") {
+            Tab("Explore", systemImage: "safari") {
                 EventListView()
             }
             Tab("Map", systemImage: "map") {
