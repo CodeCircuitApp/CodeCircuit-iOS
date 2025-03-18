@@ -101,7 +101,7 @@ struct EventView: View {
     @ViewBuilder
     var details: some View {
 
-        let entryFeeValue = String(format: "%.2f %@", event.entryFee, event.currency.rawValue)
+        let entryFeeValue = event.entryFee == 0.00 ? "Free" : String(format: "%.2f %@", event.entryFee, event.currency.rawValue)
         let prizePoolValue = "\(Int(event.prizePool)) \(event.currency.rawValue)"
         let durationValue = "\(event.days) \(event.days == 1 ? "day" : "days")"
         
