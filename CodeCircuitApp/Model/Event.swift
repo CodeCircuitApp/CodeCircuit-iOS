@@ -19,7 +19,7 @@ struct Event: Identifiable, Hashable {
     let eventType: EventType
     let description: String
     let days: Int
-    let prizePool: Double
+    var prizePool: Double?
     let entryFee: Double
     let currency: Currency
     let skillLevel: SkillLevel
@@ -98,7 +98,9 @@ extension Event {
             logo: URL(string: "https://via.placeholder.com/100x100/4CAF50/FFFFFF?Text=CP")!,
             educationStatus: [.higherEducationStudent, .postGraduate, .secondarySchoolStudent],
             minimumAge: 17,
-            maximumAge: nil
+            maximumAge: nil,
+            minimumTeamSize: 1,
+            maximumTeamSize: 4
         ),
         Event(
             name: "Kraków Data Science Summit",
@@ -108,7 +110,6 @@ extension Event {
             eventType: .conference,
             description: "Attend the premier Data Science Summit in Kraków and learn from industry leaders and researchers.",
             days: 3,
-            prizePool: 0.00,
             entryFee: 299.00,
             currency: .pln,
             skillLevel: .advanced,
@@ -140,7 +141,9 @@ extension Event {
             logo: URL(string: "https://via.placeholder.com/100x100/9C27B0/FFFFFF?Text=GDL")!,
             educationStatus: [.secondarySchoolStudent, .higherEducationStudent, .postGraduate],
             minimumAge: 16,
-            maximumAge: nil
+            maximumAge: nil,
+            minimumTeamSize: 1,
+            maximumTeamSize: 3
         ),
         Event(
             name: "Wrocław Cybersecurity Challenge",
@@ -161,7 +164,9 @@ extension Event {
             logo: URL(string: "https://via.placeholder.com/100x100/F44336/FFFFFF?Text=SW")!,
             educationStatus: [.higherEducationStudent, .postGraduate, .nonStudent],
             minimumAge: 18,
-            maximumAge: nil
+            maximumAge: nil,
+            minimumTeamSize: 4,
+            maximumTeamSize: 4
         ),
         Event(
             name: "Poznań Mobile Innovation Lab",
@@ -171,7 +176,6 @@ extension Event {
             eventType: .workshop,
             description: "A hands-on workshop in Poznań focused on the latest trends and techniques in mobile application development.",
             days: 1,
-            prizePool: 0.00,
             entryFee: 79.99,
             currency: .pln,
             skillLevel: .intermediate,
@@ -192,7 +196,6 @@ extension Event {
             eventType: .conference,
             description: "Explore the cutting edge of Artificial Intelligence and Robotics at this expo in Gdańsk.",
             days: 2,
-            prizePool: 0.00,
             entryFee: 149.00,
             currency: .pln,
             skillLevel: .beginner,
@@ -224,7 +227,9 @@ extension Event {
             logo: URL(string: "https://via.placeholder.com/100x100/FFC107/000000?Text=SS")!,
             educationStatus: [.nonStudent, .secondarySchoolStudent, .higherEducationStudent, .postGraduate, .nonStudent],
             minimumAge: 16,
-            maximumAge: nil
+            maximumAge: nil,
+            minimumTeamSize: 3,
+            maximumTeamSize: 4
         ),
         Event(
             name: "Lublin Cloud Technologies Forum",
@@ -234,7 +239,6 @@ extension Event {
             eventType: .conference,
             description: "Discuss the latest advancements and best practices in cloud computing at the Lublin forum.",
             days: 2,
-            prizePool: 0.00,
             entryFee: 179.00,
             currency: .pln,
             skillLevel: .intermediate,
@@ -266,7 +270,9 @@ extension Event {
             logo: URL(string: "https://via.placeholder.com/100x100/795548/FFFFFF?Text=IB")!,
             educationStatus: [.secondarySchoolStudent, .higherEducationStudent, .postGraduate],
             minimumAge: 16,
-            maximumAge: nil
+            maximumAge: nil,
+            minimumTeamSize: 2,
+            maximumTeamSize: 4
         ),
         Event(
             name: "Rzeszów Future of Frontend Meetup",
@@ -276,7 +282,6 @@ extension Event {
             eventType: .other,
             description: "Join frontend developers in Rzeszów to discuss the latest trends and future of web development.",
             days: 1,
-            prizePool: 0.00,
             entryFee: 0.00,
             currency: .pln,
             skillLevel: .intermediate,

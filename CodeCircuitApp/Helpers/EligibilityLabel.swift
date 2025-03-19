@@ -8,8 +8,12 @@
 import Foundation
 
 enum EligibilityLabel {
-    static func getEligibleLabel(from eligibilityCriteria: [Event.EducationStatus]) -> String {
-        if eligibilityCriteria.isEmpty {
+    static func getEligibleLabel(from eligibilityCriteria: [Event.EducationStatus]?) -> String {
+        guard let eligibilityCriteria else {
+            return "No specific education status required."
+        }
+        
+        guard !eligibilityCriteria.isEmpty else {
             return "No specific education status required."
         }
 
@@ -39,9 +43,13 @@ enum EligibilityLabel {
         }
     }
     
-    static func getIneligibleLabel(excluding eligibilityCriteria: [Event.EducationStatus]) -> String {
-        if Event.EducationStatus.allCases.isEmpty {
-            return "No education statuses defined."
+    static func getIneligibleLabel(excluding eligibilityCriteria: [Event.EducationStatus]?) -> String {
+        guard let eligibilityCriteria else {
+            return "No specific education status required."
+        }
+        
+        guard !eligibilityCriteria.isEmpty else {
+            return "No specific education status required."
         }
 
         let ineligibleStatuses = Event.EducationStatus.allCases.filter { !eligibilityCriteria.contains($0) }

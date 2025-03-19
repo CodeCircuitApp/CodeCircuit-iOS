@@ -102,8 +102,19 @@ struct EventView: View {
     var details: some View {
 
         let entryFeeValue = event.entryFee == 0.00 ? "Free" : String(format: "%.2f %@", event.entryFee, event.currency.rawValue)
-        let prizePoolValue = "\(Int(event.prizePool)) \(event.currency.rawValue)"
+        let prizePoolValue = "\(Int(event.prizePool ?? 0)) \(event.currency.rawValue)"
         let durationValue = "\(event.days) \(event.days == 1 ? "day" : "days")"
+        let teamSizeValue: String = {
+            guard let minSize = event.minimumTeamSize, let maxSize = event.maximumTeamSize else {
+                return "Unspecified"
+            }
+
+            if minSize == maxSize {
+                return "\(minSize)"
+            } else {
+                return "\(minSize) - \(maxSize)"
+            }
+        }()
         
         VStack {
             HStack {
@@ -115,10 +126,11 @@ struct EventView: View {
             LazyVGrid(columns: [GridItem(), GridItem()]) {
                 EventDetailCell(label: "Date", text: event.date.formatted())
                 EventDetailCell(label: "Entry Fee", text: entryFeeValue)
-                EventDetailCell(label: "Prize Pool", text: prizePoolValue)
+                event.prizePool != nil ? EventDetailCell(label: "Prize Pool", text: prizePoolValue) : nil
                 EventDetailCell(label: "Duration", text: durationValue)
                 EventDetailCell(label: "Skill Level", text: event.skillLevel.rawValue)
                 EventDetailCell(label: "Format", text: event.eventType.rawValue)
+                event.eventType == .hackathon ? EventDetailCell(label: "Team Size", text: teamSizeValue) : nil
             }
         }
         .padding()
@@ -138,7 +150,9 @@ struct EventView: View {
                     .fontWeight(.bold)
                 Spacer()
             }
-            EligibilityCriteriaView(criteriaLabel: "Education Status", eligibleLabel: educationEligibilityLabel, ineligibleLabel: educationIneligibilityLabel)
+            if event.eventType == .hackathon {
+                EligibilityCriteriaView(criteriaLabel: "Education Status", eligibleLabel: educationEligibilityLabel, ineligibleLabel: educationIneligibilityLabel)
+            }
             EligibilityCriteriaView(criteriaLabel: "Age Requirements", eligibleLabel: ageEligibilityLabel, ineligibleLabel: ageIneligbilityLabel)
         }
         .padding()
@@ -156,5 +170,5 @@ struct EventView: View {
 }
 
 #Preview {
-    EventView(event: Event.mockEvents.first!)
+    EventView(event: Event.mockEvents[4])
 }
