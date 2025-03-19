@@ -14,7 +14,7 @@ struct ContentView: View {
                 EventListView()
             }
             Tab("Map", systemImage: "map") {
-                Text("Map")
+                MapView()
             }
         }
     }
