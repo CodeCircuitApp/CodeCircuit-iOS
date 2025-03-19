@@ -24,6 +24,12 @@ struct Event: Identifiable, Hashable {
     let currency: Currency
     let skillLevel: SkillLevel
     
+    // MARK: - Optional location information
+    
+    var address: Address?
+    var latitude: Double?
+    var longitude: Double?
+    
     
     // MARK: - Organizer information
     
