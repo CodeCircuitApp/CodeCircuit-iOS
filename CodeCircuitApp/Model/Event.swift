@@ -41,9 +41,11 @@ struct Event: Identifiable, Hashable {
     
     // MARK: - Eligibility criteria
     
-    let educationStatus: [EducationStatus]
+    var educationStatus: [EducationStatus]?
     let minimumAge: Int
-    let maximumAge: Int?
+    var maximumAge: Int?
+    var minimumTeamSize: Int?
+    var maximumTeamSize: Int?
     
     // MARK: - Enums
     
