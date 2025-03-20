@@ -7,16 +7,17 @@
 
 import Foundation
 
-struct Event: Identifiable, Hashable {
-    let id = UUID()
+struct Event: Identifiable, Hashable, Codable {
+    let id: String
+    
     
     // MARK: - General information
     
     let name: String
     let date: Date
     let technology: [String]
-    let locationType: locationType
-    let type: type
+    let locationType: LocationType
+    let type: EventType
     let description: String
     let days: Int
     var prizePool: Double?
@@ -36,8 +37,8 @@ struct Event: Identifiable, Hashable {
     let organizer: String
     let website: URL
     let email: String
-    let imageURL: URL
-    let logo: URL
+    let imageUrl: URL
+    let logoUrl: URL
     
     // MARK: - Eligibility criteria
     
@@ -49,37 +50,66 @@ struct Event: Identifiable, Hashable {
     
     // MARK: - Enums
     
-    enum locationType: String, CaseIterable {
-        case remote = "Remote"
-        case local = "Local"
-        case hybrid = "Hybrid"
+    enum LocationType: String, CaseIterable, Codable {
+        case remote = "remote"
+        case local = "local"
+        case hybrid = "hybrid"
     }
 
-    enum type: String, CaseIterable {
-        case hackathon = "Hackathon"
-        case conference = "Conference"
-        case workshop = "Workshop"
-        case other = "Other"
+    enum EventType: String, CaseIterable, Codable {
+        case hackathon = "hackathon"
+        case conference = "conference"
+        case workshop = "workshop"
+        case other = "other"
     }
     
-    enum EducationStatus: String, CaseIterable {
-        case nonStudent = "Non-Student"
-        case primarySchoolStudent = "Primary School Student"
-        case secondarySchoolStudent = "Secondary School Student"
-        case higherEducationStudent = "Higher Education Student"
-        case postGraduate = "Post-Graduate"
+    enum EducationStatus: String, CaseIterable, Codable {
+        case nonStudent = "nonStudent"
+        case primarySchoolStudent = "primarySchoolStudent"
+        case secondarySchoolStudent = "secondarySchoolStudent"
+        case higherEducationStudent = "higherEducationStudent"
+        case postGraduate = "postGraduate"
     }
     
-    enum SkillLevel: String, CaseIterable {
-          case beginner = "Beginner"
-          case intermediate = "Intermediate"
-          case advanced = "Advanced"
+    enum SkillLevel: String, CaseIterable, Codable {
+          case beginner = "beginner"
+          case intermediate = "intermediate"
+          case advanced = "advanced"
       }
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case name
+        case date
+        case technology
+        case locationType
+        case type
+        case description
+        case days
+        case entryFee
+        case prizePool
+        case currency
+        case skillLevel
+        case address
+        case latitude
+        case longitude
+        case organizer
+        case website
+        case email
+        case imageUrl
+        case logoUrl
+        case educationStatus
+        case minimumAge
+        case maximumAge
+        case minimumTeamSize
+        case maximumTeamSize
+    }
 }
 
 extension Event {
     static let mockEvents: [Event] = [
         Event(
+            id: "1",
             name: "Warsaw Web Development Weekend",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 8, day: 10))!,
             technology: ["HTML", "CSS", "JavaScript", "React"],
@@ -94,8 +124,8 @@ extension Event {
             organizer: "Code Poland",
             website: URL(string:"https://codepoland.pl")!,
             email: "warsaw@codepoland.pl",
-            imageURL: URL(string: "https://via.placeholder.com/800x400/4CAF50/FFFFFF?Text=Warsaw%20Web%20Dev")!,
-            logo: URL(string: "https://via.placeholder.com/100x100/4CAF50/FFFFFF?Text=CP")!,
+            imageUrl: URL(string: "https://via.placeholder.com/800x400/4CAF50/FFFFFF?Text=Warsaw%20Web%20Dev")!,
+            logoUrl: URL(string: "https://via.placeholder.com/100x100/4CAF50/FFFFFF?Text=CP")!,
             educationStatus: [.higherEducationStudent, .postGraduate, .secondarySchoolStudent],
             minimumAge: 17,
             maximumAge: nil,
@@ -103,6 +133,7 @@ extension Event {
             maximumTeamSize: 4
         ),
         Event(
+            id: "1",
             name: "Kraków Data Science Summit",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 6, day: 25))!,
             technology: ["Python", "R", "Machine Learning", "Big Data"],
@@ -116,13 +147,14 @@ extension Event {
             organizer: "Data Science Kraków",
             website: URL(string:"https://dskrakow.com")!,
             email: "info@dskrakow.com",
-            imageURL: URL(string: "https://via.placeholder.com/800x400/3F51B5/FFFFFF?Text=Kraków%20Data%20Sci")!,
-            logo: URL(string: "https://via.placeholder.com/100x100/3F51B5/FFFFFF?Text=DSK")!,
+            imageUrl: URL(string: "https://via.placeholder.com/800x400/3F51B5/FFFFFF?Text=Kraków%20Data%20Sci")!,
+            logoUrl: URL(string: "https://via.placeholder.com/100x100/3F51B5/FFFFFF?Text=DSK")!,
             educationStatus: [.higherEducationStudent, .postGraduate, .nonStudent],
             minimumAge: 18,
             maximumAge: nil
         ),
         Event(
+            id: "1",
             name: "Łódź Game Development Jam",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 9, day: 15))!,
             technology: ["Unity", "C#", "Game Design", "Art"],
@@ -137,8 +169,8 @@ extension Event {
             organizer: "GameDev Łódź",
             website: URL(string: "https://gamedevlodz.pl")!,
             email: "jam@gamedevlodz.pl",
-            imageURL: URL(string: "https://via.placeholder.com/800x400/9C27B0/FFFFFF?Text=Łódź%20Game%20Jam")!,
-            logo: URL(string: "https://via.placeholder.com/100x100/9C27B0/FFFFFF?Text=GDL")!,
+            imageUrl: URL(string: "https://via.placeholder.com/800x400/9C27B0/FFFFFF?Text=Łódź%20Game%20Jam")!,
+            logoUrl: URL(string: "https://via.placeholder.com/100x100/9C27B0/FFFFFF?Text=GDL")!,
             educationStatus: [.secondarySchoolStudent, .higherEducationStudent, .postGraduate],
             minimumAge: 16,
             maximumAge: nil,
@@ -146,6 +178,7 @@ extension Event {
             maximumTeamSize: 3
         ),
         Event(
+            id: "1",
             name: "Wrocław Cybersecurity Challenge",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 7, day: 5))!,
             technology: ["Networking", "Security", "Cryptography", "Linux"],
@@ -160,8 +193,8 @@ extension Event {
             organizer: "SecureWro",
             website: URL(string: "https://securewro.pl")!,
             email: "challenge@securewro.pl",
-            imageURL: URL(string: "https://via.placeholder.com/800x400/F44336/FFFFFF?Text=Wrocław%20Cyber")!,
-            logo: URL(string: "https://via.placeholder.com/100x100/F44336/FFFFFF?Text=SW")!,
+            imageUrl: URL(string: "https://via.placeholder.com/800x400/F44336/FFFFFF?Text=Wrocław%20Cyber")!,
+            logoUrl: URL(string: "https://via.placeholder.com/100x100/F44336/FFFFFF?Text=SW")!,
             educationStatus: [.higherEducationStudent, .postGraduate, .nonStudent],
             minimumAge: 18,
             maximumAge: nil,
@@ -169,6 +202,7 @@ extension Event {
             maximumTeamSize: 4
         ),
         Event(
+            id: "1",
             name: "Poznań Mobile Innovation Lab",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 10, day: 20))!,
             technology: ["iOS", "Android", "UI/UX", "Testing"],
@@ -182,13 +216,14 @@ extension Event {
             organizer: "Mobile Poznań",
             website: URL(string: "https://mobilepoznan.pl")!,
             email: "workshops@mobilepoznan.pl",
-            imageURL: URL(string: "https://via.placeholder.com/800x400/00BCD4/FFFFFF?Text=Poznań%20Mobile%20Lab")!,
-            logo: URL(string: "https://via.placeholder.com/100x100/00BCD4/FFFFFF?Text=MP")!,
+            imageUrl: URL(string: "https://via.placeholder.com/800x400/00BCD4/FFFFFF?Text=Poznań%20Mobile%20Lab")!,
+            logoUrl: URL(string: "https://via.placeholder.com/100x100/00BCD4/FFFFFF?Text=MP")!,
             educationStatus: [.secondarySchoolStudent, .higherEducationStudent, .nonStudent],
             minimumAge: 16,
             maximumAge: nil
         ),
         Event(
+            id: "1",
             name: "Gdańsk AI and Robotics Expo",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 5, day: 5))!,
             technology: ["AI", "Robotics", "Automation", "Sensors"],
@@ -202,13 +237,14 @@ extension Event {
             organizer: "Tech Coast Gdańsk",
             website: URL(string: "https://techcoastgdansk.pl")!,
             email: "expo@techcoastgdansk.pl",
-            imageURL: URL(string: "https://via.placeholder.com/800x400/673AB7/FFFFFF?Text=Gdańsk%20AI%20Expo")!,
-            logo: URL(string: "https://via.placeholder.com/100x100/673AB7/FFFFFF?Text=TCG")!,
+            imageUrl: URL(string: "https://via.placeholder.com/800x400/673AB7/FFFFFF?Text=Gdańsk%20AI%20Expo")!,
+            logoUrl: URL(string: "https://via.placeholder.com/100x100/673AB7/FFFFFF?Text=TCG")!,
             educationStatus: [.nonStudent, .secondarySchoolStudent, .higherEducationStudent, .postGraduate, .nonStudent],
             minimumAge: 15,
             maximumAge: nil
         ),
         Event(
+            id: "1",
             name: "Szczecin Startup Weekend",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 11, day: 3))!,
             technology: ["Business", "Marketing", "Web Development", "Pitching"],
@@ -223,8 +259,8 @@ extension Event {
             organizer: "Startup Szczecin",
             website: URL(string: "https://startupszczecin.pl")!,
             email: "weekend@startupszczecin.pl",
-            imageURL: URL(string: "https://via.placeholder.com/800x400/FFC107/000000?Text=Szczecin%20Startup")!,
-            logo: URL(string: "https://via.placeholder.com/100x100/FFC107/000000?Text=SS")!,
+            imageUrl: URL(string: "https://via.placeholder.com/800x400/FFC107/000000?Text=Szczecin%20Startup")!,
+            logoUrl: URL(string: "https://via.placeholder.com/100x100/FFC107/000000?Text=SS")!,
             educationStatus: [.nonStudent, .secondarySchoolStudent, .higherEducationStudent, .postGraduate, .nonStudent],
             minimumAge: 16,
             maximumAge: nil,
@@ -232,6 +268,7 @@ extension Event {
             maximumTeamSize: 4
         ),
         Event(
+            id: "1",
             name: "Lublin Cloud Technologies Forum",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 15))!,
             technology: ["AWS", "Azure", "Google Cloud", "DevOps"],
@@ -245,13 +282,14 @@ extension Event {
             organizer: "Cloud Lublin",
             website: URL(string: "https://cloudlublin.pl")!,
             email: "forum@cloudlublin.pl",
-            imageURL: URL(string: "https://via.placeholder.com/800x400/03A9F4/FFFFFF?Text=Lublin%20Cloud%20Forum")!,
-            logo: URL(string: "https://via.placeholder.com/100x100/03A9F4/FFFFFF?Text=CL")!,
+            imageUrl: URL(string: "https://via.placeholder.com/800x400/03A9F4/FFFFFF?Text=Lublin%20Cloud%20Forum")!,
+            logoUrl: URL(string: "https://via.placeholder.com/100x100/03A9F4/FFFFFF?Text=CL")!,
             educationStatus: [.higherEducationStudent, .postGraduate, .nonStudent],
             minimumAge: 18,
             maximumAge: nil
         ),
         Event(
+            id: "1",
             name: "Bydgoszcz IoT Innovation Challenge",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 12, day: 8))!,
             technology: ["IoT", "Sensors", "Embedded Systems", "Data Analytics"],
@@ -266,8 +304,8 @@ extension Event {
             organizer: "IoT Bydgoszcz",
             website: URL(string: "https://iotbydgoszcz.pl")!,
             email: "challenge@iotbydgoszcz.pl",
-            imageURL: URL(string: "https://via.placeholder.com/800x400/795548/FFFFFF?Text=Bydgoszcz%20IoT")!,
-            logo: URL(string: "https://via.placeholder.com/100x100/795548/FFFFFF?Text=IB")!,
+            imageUrl: URL(string: "https://via.placeholder.com/800x400/795548/FFFFFF?Text=Bydgoszcz%20IoT")!,
+            logoUrl: URL(string: "https://via.placeholder.com/100x100/795548/FFFFFF?Text=IB")!,
             educationStatus: [.secondarySchoolStudent, .higherEducationStudent, .postGraduate],
             minimumAge: 16,
             maximumAge: nil,
@@ -275,6 +313,7 @@ extension Event {
             maximumTeamSize: 4
         ),
         Event(
+            id: "1",
             name: "Rzeszów Future of Frontend Meetup",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 25))!,
             technology: ["React", "Angular", "Vue.js", "TypeScript"],
@@ -288,8 +327,8 @@ extension Event {
             organizer: "Frontend Rzeszów",
             website: URL(string: "https://frontendrzeszow.pl")!,
             email: "meetup@frontendrzeszow.pl",
-            imageURL: URL(string: "https://via.placeholder.com/800x400/E91E63/FFFFFF?Text=Rzeszów%20Frontend")!,
-            logo: URL(string: "https://via.placeholder.com/100x100/E91E63/FFFFFF?Text=FR")!,
+            imageUrl: URL(string: "https://via.placeholder.com/800x400/E91E63/FFFFFF?Text=Rzeszów%20Frontend")!,
+            logoUrl: URL(string: "https://via.placeholder.com/100x100/E91E63/FFFFFF?Text=FR")!,
             educationStatus: [.nonStudent, .secondarySchoolStudent, .higherEducationStudent, .postGraduate, .nonStudent],
             minimumAge: 15,
             maximumAge: nil

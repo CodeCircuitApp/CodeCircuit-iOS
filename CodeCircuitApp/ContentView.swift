@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var events = [Event]()
+    
     var body: some View {
         TabView {
             Tab("Explore", systemImage: "safari") {
@@ -15,6 +17,19 @@ struct ContentView: View {
             }
             Tab("Map", systemImage: "map") {
                 MapView()
+            }
+        }
+        .onAppear {
+            Task {
+                await NetworkManager.shared.getAllEvents { result in
+                    switch result {
+                    case . success(let events):
+                        print(events)
+                        self.events = events
+                    case .failure(let error):
+                        print("Error: \(error)")
+                    }
+                }
             }
         }
     }

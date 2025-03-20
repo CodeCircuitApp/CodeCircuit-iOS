@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Address: Equatable, Hashable {
+struct Address: Equatable, Hashable, Codable {
     var street: String?
     var city: String?
     var state: String? // Also province, region, voivoideship
