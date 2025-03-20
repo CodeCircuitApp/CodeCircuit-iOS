@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct EventListView: View {
+    let events: [Event]
+    
     var body: some View {
         NavigationStack {
             List {
-                ForEach(Event.mockEvents) { event in
+                ForEach(events) { event in
                     NavigationLink(value: event) {
                         EventCardView(event: event)
                     }
@@ -26,5 +28,5 @@ struct EventListView: View {
 }
 
 #Preview {
-    EventListView()
+    EventListView(events: Event.mockEvents)
 }
