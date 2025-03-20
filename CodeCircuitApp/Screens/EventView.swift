@@ -108,12 +108,10 @@ struct EventView: View {
             guard let minSize = event.minimumTeamSize, let maxSize = event.maximumTeamSize else {
                 return "Unspecified"
             }
+            
+            let isRange = minSize != maxSize
 
-            if minSize == maxSize {
-                return "\(minSize)"
-            } else {
-                return "\(minSize) - \(maxSize)"
-            }
+            return isRange ? "\(minSize) - \(maxSize)" : "\(minSize)"
         }()
         
         VStack {
