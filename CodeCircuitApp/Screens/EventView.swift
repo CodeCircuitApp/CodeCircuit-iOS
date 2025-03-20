@@ -55,7 +55,7 @@ struct EventView: View {
                 HStack {
                     VStack(alignment: .leading) {
                         HStack {
-                            Text("\(event.eventType.rawValue.lowercased()) · \(event.eventLocationType.rawValue.lowercased()) · \(event.entryFee == 0 ? "free" : "paid")")
+                            Text("\(event.type.rawValue.lowercased()) · \(event.locationType.rawValue.lowercased()) · \(event.entryFee == 0 ? "free" : "paid")")
                                 .font(.callout)
                             Spacer()
                         }
@@ -127,8 +127,8 @@ struct EventView: View {
                 event.prizePool != nil ? EventDetailCell(label: "Prize Pool", text: prizePoolValue) : nil
                 EventDetailCell(label: "Duration", text: durationValue)
                 EventDetailCell(label: "Skill Level", text: event.skillLevel.rawValue)
-                EventDetailCell(label: "Format", text: event.eventType.rawValue)
-                event.eventType == .hackathon ? EventDetailCell(label: "Team Size", text: teamSizeValue) : nil
+                EventDetailCell(label: "Format", text: event.type.rawValue)
+                event.type == .hackathon ? EventDetailCell(label: "Team Size", text: teamSizeValue) : nil
             }
         }
         .padding()
@@ -148,7 +148,7 @@ struct EventView: View {
                     .fontWeight(.bold)
                 Spacer()
             }
-            if event.eventType == .hackathon {
+            if event.type == .hackathon {
                 EligibilityCriteriaView(criteriaLabel: "Education Status", eligibleLabel: educationEligibilityLabel, ineligibleLabel: educationIneligibilityLabel)
             }
             EligibilityCriteriaView(criteriaLabel: "Age Requirements", eligibleLabel: ageEligibilityLabel, ineligibleLabel: ageIneligbilityLabel)

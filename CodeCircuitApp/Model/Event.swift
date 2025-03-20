@@ -15,8 +15,8 @@ struct Event: Identifiable, Hashable {
     let name: String
     let date: Date
     let technology: [String]
-    let eventLocationType: EventLocationType
-    let eventType: EventType
+    let locationType: locationType
+    let type: type
     let description: String
     let days: Int
     var prizePool: Double?
@@ -49,13 +49,13 @@ struct Event: Identifiable, Hashable {
     
     // MARK: - Enums
     
-    enum EventLocationType: String, CaseIterable {
+    enum locationType: String, CaseIterable {
         case remote = "Remote"
         case local = "Local"
         case hybrid = "Hybrid"
     }
 
-    enum EventType: String, CaseIterable {
+    enum type: String, CaseIterable {
         case hackathon = "Hackathon"
         case conference = "Conference"
         case workshop = "Workshop"
@@ -83,8 +83,8 @@ extension Event {
             name: "Warsaw Web Development Weekend",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 8, day: 10))!,
             technology: ["HTML", "CSS", "JavaScript", "React"],
-            eventLocationType: .local,
-            eventType: .hackathon,
+            locationType: .local,
+            type: .hackathon,
             description: "Join fellow developers in Warsaw for an intense weekend of building amazing web applications.",
             days: 2,
             prizePool: 8000.00,
@@ -106,8 +106,8 @@ extension Event {
             name: "Kraków Data Science Summit",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 6, day: 25))!,
             technology: ["Python", "R", "Machine Learning", "Big Data"],
-            eventLocationType: .local,
-            eventType: .conference,
+            locationType: .local,
+            type: .conference,
             description: "Attend the premier Data Science Summit in Kraków and learn from industry leaders and researchers.",
             days: 3,
             entryFee: 299.00,
@@ -126,8 +126,8 @@ extension Event {
             name: "Łódź Game Development Jam",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 9, day: 15))!,
             technology: ["Unity", "C#", "Game Design", "Art"],
-            eventLocationType: .local,
-            eventType: .hackathon,
+            locationType: .local,
+            type: .hackathon,
             description: "Join the game development community in Łódź for a weekend of creating exciting new games.",
             days: 3,
             prizePool: 5000.00,
@@ -149,8 +149,8 @@ extension Event {
             name: "Wrocław Cybersecurity Challenge",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 7, day: 5))!,
             technology: ["Networking", "Security", "Cryptography", "Linux"],
-            eventLocationType: .local,
-            eventType: .hackathon,
+            locationType: .local,
+            type: .hackathon,
             description: "Test your cybersecurity skills in the Wrocław Cybersecurity Challenge and compete for recognition.",
             days: 2,
             prizePool: 7000.00,
@@ -172,8 +172,8 @@ extension Event {
             name: "Poznań Mobile Innovation Lab",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 10, day: 20))!,
             technology: ["iOS", "Android", "UI/UX", "Testing"],
-            eventLocationType: .local,
-            eventType: .workshop,
+            locationType: .local,
+            type: .workshop,
             description: "A hands-on workshop in Poznań focused on the latest trends and techniques in mobile application development.",
             days: 1,
             entryFee: 79.99,
@@ -192,8 +192,8 @@ extension Event {
             name: "Gdańsk AI and Robotics Expo",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 5, day: 5))!,
             technology: ["AI", "Robotics", "Automation", "Sensors"],
-            eventLocationType: .local,
-            eventType: .conference,
+            locationType: .local,
+            type: .conference,
             description: "Explore the cutting edge of Artificial Intelligence and Robotics at this expo in Gdańsk.",
             days: 2,
             entryFee: 149.00,
@@ -212,8 +212,8 @@ extension Event {
             name: "Szczecin Startup Weekend",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 11, day: 3))!,
             technology: ["Business", "Marketing", "Web Development", "Pitching"],
-            eventLocationType: .local,
-            eventType: .hackathon,
+            locationType: .local,
+            type: .hackathon,
             description: "Launch your startup idea in a single weekend in Szczecin! Collaborate, build, and pitch your vision.",
             days: 3,
             prizePool: 3000.00,
@@ -235,8 +235,8 @@ extension Event {
             name: "Lublin Cloud Technologies Forum",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 4, day: 15))!,
             technology: ["AWS", "Azure", "Google Cloud", "DevOps"],
-            eventLocationType: .local,
-            eventType: .conference,
+            locationType: .local,
+            type: .conference,
             description: "Discuss the latest advancements and best practices in cloud computing at the Lublin forum.",
             days: 2,
             entryFee: 179.00,
@@ -255,8 +255,8 @@ extension Event {
             name: "Bydgoszcz IoT Innovation Challenge",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 12, day: 8))!,
             technology: ["IoT", "Sensors", "Embedded Systems", "Data Analytics"],
-            eventLocationType: .local,
-            eventType: .hackathon,
+            locationType: .local,
+            type: .hackathon,
             description: "Innovate with the Internet of Things in Bydgoszcz! Tackle real-world challenges using IoT technologies.",
             days: 2,
             prizePool: 6000.00,
@@ -278,8 +278,8 @@ extension Event {
             name: "Rzeszów Future of Frontend Meetup",
             date: Calendar.current.date(from: DateComponents(year: 2025, month: 3, day: 25))!,
             technology: ["React", "Angular", "Vue.js", "TypeScript"],
-            eventLocationType: .local,
-            eventType: .other,
+            locationType: .local,
+            type: .other,
             description: "Join frontend developers in Rzeszów to discuss the latest trends and future of web development.",
             days: 1,
             entryFee: 0.00,

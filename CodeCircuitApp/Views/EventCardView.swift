@@ -26,7 +26,7 @@ struct EventCardView: View {
                 .lineLimit(2)
             }
             HStack {
-                Text("\(event.organizer) · \(event.eventType.rawValue) · \(event.eventLocationType.rawValue)")
+                Text("\(event.organizer) · \(event.type.rawValue) · \(event.locationType.rawValue)")
                     .foregroundColor(.gray) // Optional: Style the dots and text together
                 Spacer()
             }
