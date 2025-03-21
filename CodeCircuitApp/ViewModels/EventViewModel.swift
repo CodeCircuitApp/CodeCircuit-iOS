@@ -23,8 +23,7 @@ import SwiftUI
                    self.events = events
                    self.saveEvents()
                case .failure(let error):
-                   print(error)
-                   self.networkError = .unknown
+                   self.networkError = error
                    self.loadEvents()
                }
            }

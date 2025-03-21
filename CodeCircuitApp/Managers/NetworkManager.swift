@@ -58,6 +58,10 @@ class NetworkManager {
                 completion(.failure(.decodingError))
                 return
             }
+            if error is URLError {
+                completion(.failure(.connectionFailure))
+                return
+            }
             completion(.failure(.unknown))
         }
     }
@@ -71,6 +75,7 @@ enum CCError: String, Error {
     case emptyData
     case unknown
     case decodingError
+    case connectionFailure
     
     var localizedDescription: String {
         switch self {
@@ -88,6 +93,8 @@ enum CCError: String, Error {
             return "An unknown error occurred. Please try again."
         case .decodingError:
             return "There was an error decoding the data. Please try again."
+        case .connectionFailure:
+            return "Connection failed. Please check your internet connection."
         }
     }
 }

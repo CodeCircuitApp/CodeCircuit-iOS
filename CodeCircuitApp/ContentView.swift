@@ -20,13 +20,8 @@ struct ContentView: View {
                 MapView()
             }
         }
-        .alert("Alert", isPresented: .constant(eventViewModel.hasError)) {
-            Button {
-                print("tap")
-                eventViewModel.networkError = nil
-            } label: {
-                Text("Dismiss")
-            }
+        .alert(isPresented: .constant(eventViewModel.hasError)) {
+            Alert(title: Text("An error occured"), message: Text(eventViewModel.networkError?.localizedDescription ?? "Unexpected error. Please try again."), dismissButton: .default(Text("Ok"), action: {eventViewModel.networkError = nil}))
         }
         .onAppear { eventViewModel.fetchEvents() }
     }
