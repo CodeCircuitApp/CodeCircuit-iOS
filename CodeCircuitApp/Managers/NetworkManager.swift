@@ -14,15 +14,33 @@ class NetworkManager {
     
     func getAllEvents(completion: @escaping (Result<[Event], CCError>) -> Void) async {
         guard let url = URL(string: "http://192.168.0.194:3000/events") else {
-            completion(.failure(.badURL))
+            completion(.failure(.invalidUrl))
             return
         }
         
         do {
             let (data, response) = try await URLSession.shared.data(from: url)
             
-            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
-                completion(.failure(.badRequest))
+            guard let response = response as? HTTPURLResponse else {
+                completion(.failure(.unexpectedResponse))
+                return
+            }
+            
+            guard (200...299).contains(response.statusCode) else {
+                switch response.statusCode {
+                case 400:
+                    completion(.failure(.badRequest))
+                case 500:
+                    completion(.failure(.serverError))
+                default:
+                    completion(.failure(.unknown))
+                }
+                
+                return
+            }
+            
+            guard !data.isEmpty else {
+                completion(.failure(.emptyData))
                 return
             }
             
@@ -36,14 +54,40 @@ class NetworkManager {
             
             completion(.success(events))
         } catch {
-            print(error)
+            if error is DecodingError {
+                completion(.failure(.decodingError))
+                return
+            }
             completion(.failure(.unknown))
         }
     }
 }
 
 enum CCError: String, Error {
-    case badURL = "Bad URL"
-    case badRequest = "Bad request"
-    case unknown = "Unknown error"
+    case invalidUrl
+    case unexpectedResponse
+    case badRequest
+    case serverError
+    case emptyData
+    case unknown
+    case decodingError
+    
+    var localizedDescription: String {
+        switch self {
+        case .invalidUrl:
+            return "The URL you're trying to reach is invalid."
+        case .unexpectedResponse:
+            return "The server returned an unexpected response."
+        case .badRequest:
+            return "The request was malformed or invalid."
+        case .serverError:
+            return "The server encountered an error. Please try again later."
+        case .emptyData:
+            return "The server returned empty data."
+        case .unknown:
+            return "An unknown error occurred. Please try again."
+        case .decodingError:
+            return "There was an error decoding the data. Please try again."
+        }
+    }
 }
