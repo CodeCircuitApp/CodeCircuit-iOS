@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(EventViewModel.self) var eventViewModel: EventViewModel
+    @Environment(EventViewModel.self) private var eventViewModel: EventViewModel
+    @State var showAlert = true
     
     var body: some View {
         TabView {
@@ -17,6 +18,14 @@ struct ContentView: View {
             }
             Tab("Map", systemImage: "map") {
                 MapView()
+            }
+        }
+        .alert("Alert", isPresented: .constant(eventViewModel.hasError)) {
+            Button {
+                print("tap")
+                eventViewModel.networkError = nil
+            } label: {
+                Text("Dismiss")
             }
         }
         .onAppear { eventViewModel.fetchEvents() }

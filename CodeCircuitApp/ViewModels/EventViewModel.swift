@@ -9,6 +9,11 @@ import SwiftUI
 
 @Observable class EventViewModel {
     var events: [Event] = []
+    var networkError: CCError? = nil
+    
+    var hasError: Bool {
+        return networkError != nil
+    }
     
     func fetchEvents() {
         Task {
@@ -19,6 +24,7 @@ import SwiftUI
                    self.saveEvents()
                case .failure(let error):
                    print(error)
+                   self.networkError = .unknown
                    self.loadEvents()
                }
            }
