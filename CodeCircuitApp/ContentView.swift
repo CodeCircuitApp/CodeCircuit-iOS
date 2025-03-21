@@ -8,33 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var events = [Event]()
+    @Environment(EventViewModel.self) var eventViewModel: EventViewModel
     
     var body: some View {
         TabView {
             Tab("Explore", systemImage: "safari") {
-                EventListView(events: events)
+                EventListView(events: eventViewModel.events)
             }
             Tab("Map", systemImage: "map") {
                 MapView()
             }
         }
-        .onAppear {
-            Task {
-                await NetworkManager.shared.getAllEvents { result in
-                    switch result {
-                    case . success(let events):
-                        print(events)
-                        self.events = events
-                    case .failure(let error):
-                        print("Error: \(error)")
-                    }
-                }
-            }
-        }
+        .onAppear { eventViewModel.fetchEvents() }
     }
 }
 
 #Preview {
     ContentView()
+        .environment(EventViewModel())
 }

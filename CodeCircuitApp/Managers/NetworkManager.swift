@@ -13,7 +13,7 @@ class NetworkManager {
     private init() {}
     
     func getAllEvents(completion: @escaping (Result<[Event], CCError>) -> Void) async {
-        guard let url = URL(string: "http://localhost:3000/events") else {
+        guard let url = URL(string: "http://192.168.0.194:3000/events") else {
             completion(.failure(.badURL))
             return
         }
