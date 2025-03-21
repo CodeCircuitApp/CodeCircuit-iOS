@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EventListView: View {
+    @Environment(EventViewModel.self) private var eventViewModel: EventViewModel
+    
     let events: [Event]
     
     var body: some View {
@@ -18,6 +20,9 @@ struct EventListView: View {
                         EventCardView(event: event)
                     }
                 }
+            }
+            .refreshable {
+                eventViewModel.fetchEvents()
             }
             .navigationDestination(for: Event.self) { event in
                 EventView(event: event)
