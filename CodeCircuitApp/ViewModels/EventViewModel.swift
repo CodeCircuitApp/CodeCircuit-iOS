@@ -10,23 +10,31 @@ import SwiftUI
 @Observable class EventViewModel {
     var events: [Event] = []
     var networkError: CCError? = nil
+    var isFetching = false
+    var gotAllEvents = false
     
     var hasError: Bool {
         return networkError != nil
     }
     
-    func fetchEvents() {
+    func fetchEvents(sizePerPage: Int, page: Binding<Int>) {
+        isFetching = true
         Task {
-            await NetworkManager.shared.getAllEvents { result in
-               switch result {
-               case .success(let events):
-                   self.events = events
-                   self.saveEvents()
-               case .failure(let error):
-                   self.networkError = error
-                   self.loadEvents()
-               }
-           }
+            await NetworkManager.shared.getEvents(sizePerPage: sizePerPage, page: page.wrappedValue) { result in
+                switch result {
+                case .success(let events):
+                    if events.count < sizePerPage {
+                        self.gotAllEvents = true
+                    }
+                    page.wrappedValue += 1
+                    self.events.append(contentsOf: events)
+                    self.saveEvents()
+                case .failure(let error):
+                    self.networkError = error
+                    self.loadEvents()
+                }
+                self.isFetching = false
+            }
         }
     }
     

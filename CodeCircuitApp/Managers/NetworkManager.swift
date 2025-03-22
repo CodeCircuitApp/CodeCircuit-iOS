@@ -12,6 +12,60 @@ class NetworkManager {
     
     private init() {}
     
+    func getEvents(sizePerPage: Int, page: Int, completion: @escaping (Result<[Event], CCError>) -> Void) async {
+        guard let url = URL(string: "http://192.168.0.194:3000/events?sizePerPage=\(sizePerPage)&page=\(page)") else {
+            completion(.failure(.invalidUrl))
+            return
+        }
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(from: url)
+            
+            guard let response = response as? HTTPURLResponse else {
+                completion(.failure(.unexpectedResponse))
+                return
+            }
+            
+            guard (200...299).contains(response.statusCode) else {
+                switch response.statusCode {
+                case 400:
+                    completion(.failure(.badRequest))
+                case 500:
+                    completion(.failure(.serverError))
+                default:
+                    completion(.failure(.unknown))
+                }
+                
+                return
+            }
+            
+            guard !data.isEmpty else {
+                completion(.failure(.emptyData))
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            
+            decoder.dateDecodingStrategy = .formatted(dateFormatter)
+            
+            let events = try decoder.decode([Event].self, from: data)
+            
+            completion(.success(events))
+        } catch {
+            if error is DecodingError {
+                completion(.failure(.decodingError))
+                return
+            }
+            if error is URLError {
+                completion(.failure(.connectionFailure))
+                return
+            }
+            completion(.failure(.unknown))
+        }
+    }
+    
     func getAllEvents(completion: @escaping (Result<[Event], CCError>) -> Void) async {
         guard let url = URL(string: "http://192.168.0.194:3000/events") else {
             completion(.failure(.invalidUrl))
