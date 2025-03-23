@@ -27,20 +27,7 @@ struct EventListView: View {
                             }
                         }
                     }
-                    
-                    if eventViewModel.isFetching {
-                        Section {
-                            HStack {
-                                Spacer()
-                                ProgressView()
-                                    .controlSize(.extraLarge)
-                                Spacer()
-                            }
-                            .padding()
-                            .id(UUID())
-                            .listRowBackground(Color.clear)
-                        }
-                    }
+                    loadingIndicator
                 }
             }
             .onAppear() {
@@ -50,6 +37,23 @@ struct EventListView: View {
                 EventView(event: event)
             }
             .navigationTitle("Events")
+        }
+    }
+    
+    @ViewBuilder
+    var loadingIndicator: some View {
+        if eventViewModel.isFetching {
+            Section {
+                HStack {
+                    Spacer()
+                    ProgressView()
+                        .controlSize(.extraLarge)
+                    Spacer()
+                }
+                .padding()
+                .id(UUID())
+                .listRowBackground(Color.clear)
+            }
         }
     }
 }
