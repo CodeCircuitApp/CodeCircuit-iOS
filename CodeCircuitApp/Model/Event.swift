@@ -50,20 +50,26 @@ struct Event: Identifiable, Hashable, Codable {
     
     // MARK: - Enums
     
-    enum LocationType: String, CaseIterable, Codable {
+    enum LocationType: String, CaseIterable, Codable, Identifiable {
+        var id: RawValue { rawValue }
+        
         case remote = "remote"
         case local = "local"
         case hybrid = "hybrid"
     }
-
-    enum EventType: String, CaseIterable, Codable {
+    
+    enum EventType: String, CaseIterable, Codable, Identifiable {
+        var id: RawValue { rawValue }
+        
         case hackathon = "hackathon"
         case conference = "conference"
         case workshop = "workshop"
         case other = "other"
     }
     
-    enum EducationStatus: String, CaseIterable, Codable {
+    enum EducationStatus: String, CaseIterable, Codable, Identifiable {
+        var id: RawValue { rawValue }
+        
         case nonStudent = "nonStudent"
         case primarySchoolStudent = "primarySchoolStudent"
         case secondarySchoolStudent = "secondarySchoolStudent"
@@ -71,11 +77,13 @@ struct Event: Identifiable, Hashable, Codable {
         case postGraduate = "postGraduate"
     }
     
-    enum SkillLevel: String, CaseIterable, Codable {
-          case beginner = "beginner"
-          case intermediate = "intermediate"
-          case advanced = "advanced"
-      }
+    enum SkillLevel: String, CaseIterable, Codable, Identifiable {
+        var id: RawValue { rawValue }
+        
+        case beginner = "beginner"
+        case intermediate = "intermediate"
+        case advanced = "advanced"
+    }
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
