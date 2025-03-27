@@ -99,4 +99,19 @@ enum EligibilityLabel {
             return "Individuals under \(minimumAge) are not eligible."
         }
     }
+    
+    static func filterEligibleLabel(_ status: Event.EducationStatus) -> String {
+        switch status {
+        case .nonStudent:
+            return "non-students"
+        case .primarySchoolStudent:
+            return "primary schools"
+        case .secondarySchoolStudent:
+            return "middle schools"
+        case .higherEducationStudent:
+            return "undergratues"
+        case .postGraduate:
+            return "post graduates"
+        }
+    }
 }

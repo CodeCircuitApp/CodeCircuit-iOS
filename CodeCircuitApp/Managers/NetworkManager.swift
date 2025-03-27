@@ -13,7 +13,7 @@ class NetworkManager {
     private init() {}
     
     func getEvents(sizePerPage: Int, page: Int, completion: @escaping (Result<[Event], CCError>) -> Void) async {
-        guard let url = URL(string: "http://192.168.0.194:3000/events?sizePerPage=\(sizePerPage)&page=\(page)") else {
+        guard let url = URL(string: "http://localhost:3000/events?sizePerPage=\(sizePerPage)&page=\(page)") else {
             completion(.failure(.invalidUrl))
             return
         }

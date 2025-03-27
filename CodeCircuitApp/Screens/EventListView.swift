@@ -9,7 +9,9 @@ import SwiftUI
 
 struct EventListView: View {
     @Environment(EventViewModel.self) private var eventViewModel: EventViewModel
-    @State var page = 1
+    @State private var eventFilterViewModel = EventFilterViewModel()
+    @State private var showFilterView = false
+    @State private var page = 1
     
     let events: [Event]
     
@@ -30,6 +32,13 @@ struct EventListView: View {
                     loadingIndicator
                 }
             }
+            .sheet(isPresented: $showFilterView) {
+                FilterView(showFilterView: $showFilterView) {
+                    print(eventFilterViewModel.locationTypes)
+                }
+                .environment(eventFilterViewModel)
+                .presentationDetents([.medium])
+            }
             .onAppear() {
                 eventViewModel.fetchEvents(sizePerPage: 10, page: $page)
             }
@@ -37,6 +46,15 @@ struct EventListView: View {
                 EventView(event: event)
             }
             .navigationTitle("Events")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showFilterView = true
+                    } label: {
+                        Image(systemName: "slider.horizontal.3")
+                    }
+                }
+            }
         }
     }
     
@@ -60,4 +78,5 @@ struct EventListView: View {
 
 #Preview {
     EventListView(events: Event.mockEvents)
+        .environment(EventViewModel())
 }
