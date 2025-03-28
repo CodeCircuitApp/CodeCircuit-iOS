@@ -33,10 +33,9 @@ struct EventListView: View {
                 }
             }
             .sheet(isPresented: $showFilterView) {
-                FilterView(showFilterView: $showFilterView) {
+                FilterView(showFilterView: $showFilterView, viewModel: eventFilterViewModel) {
                     print(eventFilterViewModel.locationTypes)
                 }
-                .environment(eventFilterViewModel)
                 .presentationDetents([.medium])
             }
             .onAppear() {

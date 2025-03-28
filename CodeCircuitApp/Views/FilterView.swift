@@ -8,21 +8,40 @@
 import SwiftUI
 
 struct FilterView: View {
-    @Environment(EventFilterViewModel.self) private var viewModel
-    @State private var types = Set<Event.EventType>()
-    @State private var locationTypes = Set<Event.LocationType>()
-    @State private var educationStatuses = Set<Event.EducationStatus>()
-    @State private var freeSelected = false
-    @State private var paidSelected = false
-    @State private var includedSelected = false
-    @State private var excludedSelected = false
-    @State private var minAge = ""
-    @State private var maxAge = ""
-    @State private var minSize = ""
-    @State private var maxSize = ""
+//    @Environment(EventFilterViewModel.self) private var viewModel
+    private var viewModel: EventFilterViewModel
+    @State private var types: Set<Event.EventType>
+    @State private var locationTypes: Set<Event.LocationType>
+    @State private var educationStatuses: Set<Event.EducationStatus>
+    @State private var freeSelected: Bool
+    @State private var paidSelected: Bool
+    @State private var includedSelected: Bool
+    @State private var excludedSelected: Bool
+    @State private var minAge: String
+    @State private var maxAge: String
+    @State private var minSize: String
+    @State private var maxSize: String
     
     @Binding var showFilterView: Bool
     let action: () -> Void
+    
+    init(showFilterView: Binding<Bool>, viewModel: EventFilterViewModel, action: @escaping () -> Void) {
+        _showFilterView = showFilterView
+        self.action = action
+        self.viewModel = viewModel
+        
+        _types = State(initialValue: viewModel.types)
+        _locationTypes = State(initialValue: viewModel.locationTypes)
+        _educationStatuses = State(initialValue: viewModel.educationStatuses)
+        _freeSelected = State(initialValue: viewModel.entryFee != nil && viewModel.entryFee == false ? true : false)
+        _paidSelected = State(initialValue: viewModel.entryFee != nil && viewModel.entryFee == true ? true : false)
+        _includedSelected = State(initialValue: viewModel.prizePool != nil && viewModel.prizePool == true ? true : false)
+        _excludedSelected = State(initialValue: viewModel.prizePool != nil && viewModel.prizePool == false ? true : false)
+        _minAge = State(initialValue: viewModel.minAge != nil ? String(viewModel.minAge ?? 0) : "")
+        _maxAge = State(initialValue: viewModel.maxAge != nil ? String(viewModel.maxAge ?? 0) : "")
+        _minSize = State(initialValue: viewModel.minTeamSize != nil ? String(viewModel.minTeamSize ?? 0) : "")
+        _maxSize = State(initialValue: viewModel.maxTeamSize != nil ? String(viewModel.maxTeamSize ?? 0) : "")
+    }
     
     var body: some View {
         NavigationStack {
@@ -109,16 +128,14 @@ struct FilterView: View {
                         pushToViewModel()
                         
                         action()
+                        
+                        print(viewModel.types)
                     } label: {
                         Text("Apply")
                             .bold()
                     }
                 }
             }
-        }
-        .onTapGesture {
-            print(types)
-            endEditing()
         }
     }
     
@@ -167,15 +184,11 @@ struct FilterView: View {
             }
         }
     }
-    
-    func printTypes() {
-        print(types)
-    }
 }
-
-#Preview {
-    @Previewable @State var isPresented = true
-    
-    FilterView(showFilterView: $isPresented, action: { print("Action") })
-        .environment(EventFilterViewModel())
-}
+//
+//#Preview {
+//    @Previewable @State var isPresented = true
+//    
+//    FilterView(showFilterView: $isPresented, action: { print("Action") })
+//        .environment(EventFilterViewModel())
+//}
