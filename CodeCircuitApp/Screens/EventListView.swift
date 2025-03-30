@@ -25,7 +25,7 @@ struct EventListView: View {
                         }
                         .onAppear {
                             if event == events.last && !eventViewModel.gotAllEvents {
-                                eventViewModel.fetchEvents(sizePerPage: 10, page: $page)
+                                eventViewModel.fetchEvents(sizePerPage: 10, page: $page, filters: eventFilterViewModel.filters)
                             }
                         }
                     }
@@ -34,12 +34,14 @@ struct EventListView: View {
             }
             .sheet(isPresented: $showFilterView) {
                 FilterView(showFilterView: $showFilterView, viewModel: eventFilterViewModel) {
-                    print(eventFilterViewModel.filters.locationTypes)
+                    eventViewModel.events.removeAll()
+                    page = 1
+                    eventViewModel.fetchEvents(sizePerPage: 10, page: $page, filters: eventFilterViewModel.filters)
                 }
                 .presentationDetents([.medium])
             }
             .onAppear() {
-                eventViewModel.fetchEvents(sizePerPage: 10, page: $page)
+                eventViewModel.fetchEvents(sizePerPage: 10, page: $page, filters: eventFilterViewModel.filters)
             }
             .navigationDestination(for: Event.self) { event in
                 EventView(event: event)

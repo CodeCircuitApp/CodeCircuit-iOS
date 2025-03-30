@@ -17,10 +17,10 @@ import SwiftUI
         return networkError != nil
     }
     
-    func fetchEvents(sizePerPage: Int, page: Binding<Int>) {
+    func fetchEvents(sizePerPage: Int, page: Binding<Int>, filters: Filters) {
         isFetching = true
         Task {
-            await NetworkManager.shared.getEvents(sizePerPage: sizePerPage, page: page.wrappedValue) { result in
+            await NetworkManager.shared.getEvents(sizePerPage: sizePerPage, page: page.wrappedValue, filters: filters) { result in
                 switch result {
                 case .success(let events):
                     if events.count < sizePerPage {

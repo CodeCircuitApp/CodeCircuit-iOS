@@ -12,11 +12,15 @@ class NetworkManager {
     
     private init() {}
     
-    func getEvents(sizePerPage: Int, page: Int, completion: @escaping (Result<[Event], CCError>) -> Void) async {
-        guard let url = URL(string: "http://localhost:3000/events?sizePerPage=\(sizePerPage)&page=\(page)") else {
+    func getEvents(sizePerPage: Int, page: Int, filters: Filters, completion: @escaping (Result<[Event], CCError>) -> Void) async {
+        guard var url = URL(string: "http://localhost:3000/events?sizePerPage=\(sizePerPage)&page=\(page)") else {
             completion(.failure(.invalidUrl))
             return
         }
+        
+        url.append(queryItems: filters.asURLQueryItems())
+        
+        print("Requesting: \(url)")
         
         do {
             let (data, response) = try await URLSession.shared.data(from: url)
