@@ -29,17 +29,17 @@ struct FilterView: View {
         self.action = action
         self.viewModel = viewModel
         
-        _types = State(initialValue: viewModel.types)
-        _locationTypes = State(initialValue: viewModel.locationTypes)
-        _educationStatuses = State(initialValue: viewModel.educationStatuses)
-        _freeSelected = State(initialValue: viewModel.entryFee != nil && viewModel.entryFee == false ? true : false)
-        _paidSelected = State(initialValue: viewModel.entryFee != nil && viewModel.entryFee == true ? true : false)
-        _includedSelected = State(initialValue: viewModel.prizePool != nil && viewModel.prizePool == true ? true : false)
-        _excludedSelected = State(initialValue: viewModel.prizePool != nil && viewModel.prizePool == false ? true : false)
-        _minAge = State(initialValue: viewModel.minAge != nil ? String(viewModel.minAge ?? 0) : "")
-        _maxAge = State(initialValue: viewModel.maxAge != nil ? String(viewModel.maxAge ?? 0) : "")
-        _minSize = State(initialValue: viewModel.minTeamSize != nil ? String(viewModel.minTeamSize ?? 0) : "")
-        _maxSize = State(initialValue: viewModel.maxTeamSize != nil ? String(viewModel.maxTeamSize ?? 0) : "")
+        _types = State(initialValue: viewModel.filters.types)
+        _locationTypes = State(initialValue: viewModel.filters.locationTypes)
+        _educationStatuses = State(initialValue: viewModel.filters.educationStatuses)
+        _freeSelected = State(initialValue: viewModel.filters.entryFee != nil && viewModel.filters.entryFee == false ? true : false)
+        _paidSelected = State(initialValue: viewModel.filters.entryFee != nil && viewModel.filters.entryFee == true ? true : false)
+        _includedSelected = State(initialValue: viewModel.filters.prizePool != nil && viewModel.filters.prizePool == true ? true : false)
+        _excludedSelected = State(initialValue: viewModel.filters.prizePool != nil && viewModel.filters.prizePool == false ? true : false)
+        _minAge = State(initialValue: viewModel.filters.minAge != nil ? String(viewModel.filters.minAge ?? 0) : "")
+        _maxAge = State(initialValue: viewModel.filters.maxAge != nil ? String(viewModel.filters.maxAge ?? 0) : "")
+        _minSize = State(initialValue: viewModel.filters.minTeamSize != nil ? String(viewModel.filters.minTeamSize ?? 0) : "")
+        _maxSize = State(initialValue: viewModel.filters.maxTeamSize != nil ? String(viewModel.filters.maxTeamSize ?? 0) : "")
     }
     
     var body: some View {
@@ -64,7 +64,7 @@ struct FilterView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         showFilterView = false
-                        pushToViewModel()
+                        viewModel.updateFilters(types: types, locationTypes: locationTypes, educationStatuses: educationStatuses, paidSelected: paidSelected, freeSelected: freeSelected, includedSelected: includedSelected, excludedSelected: excludedSelected, minAge: minAge, maxAge: maxAge, minTeamSize: minSize, maxTeamSize: maxSize)
                         action()
                     } label: {
                         Text("Apply")
@@ -156,42 +156,6 @@ struct FilterView: View {
             }
             .listRowBackground(Color.clear)
         }
-    }
-    
-    private func updateEntryFee() {
-        if freeSelected && paidSelected {
-            viewModel.entryFee = nil
-        } else if paidSelected {
-            viewModel.entryFee = true
-        } else if freeSelected {
-            viewModel.entryFee = false
-        } else {
-            viewModel.entryFee = nil
-        }
-    }
-    
-    private func updatePrizePool() {
-        if includedSelected && excludedSelected {
-            viewModel.prizePool = nil
-        } else if includedSelected {
-            viewModel.prizePool = true
-        } else if excludedSelected {
-            viewModel.prizePool = false
-        } else {
-            viewModel.prizePool = nil
-        }
-    }
-    
-    private func pushToViewModel() {
-        viewModel.types = types
-        viewModel.locationTypes = locationTypes
-        viewModel.educationStatuses = educationStatuses
-        viewModel.minAge = Int(minAge)
-        viewModel.maxAge = Int(maxAge)
-        viewModel.minTeamSize = Int(minSize)
-        viewModel.maxTeamSize = Int(maxSize)
-        updateEntryFee()
-        updatePrizePool()
     }
     
     private func toggleFilter<T: Hashable>(_ type: T, in set: inout Set<T>) {

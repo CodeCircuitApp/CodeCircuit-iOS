@@ -34,7 +34,7 @@ struct EventListView: View {
             }
             .sheet(isPresented: $showFilterView) {
                 FilterView(showFilterView: $showFilterView, viewModel: eventFilterViewModel) {
-                    print(eventFilterViewModel.locationTypes)
+                    print(eventFilterViewModel.filters.locationTypes)
                 }
                 .presentationDetents([.medium])
             }

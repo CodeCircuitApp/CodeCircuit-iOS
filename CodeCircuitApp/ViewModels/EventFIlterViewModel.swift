@@ -10,16 +10,6 @@ import SwiftUI
 @Observable class EventFilterViewModel {
     private(set) var filters = Filters()
     
-    var types: Set<Event.EventType> = []
-    var locationTypes: Set<Event.LocationType> = []
-    var educationStatuses: Set<Event.EducationStatus> = []
-    var entryFee: Bool? = nil
-    var prizePool: Bool? = nil
-    var minAge: Int? = nil
-    var maxAge: Int? = nil
-    var minTeamSize: Int? = nil
-    var maxTeamSize: Int? = nil
-    
     func updateFilters(types: Set<Event.EventType>, locationTypes: Set<Event.LocationType>, educationStatuses: Set<Event.EducationStatus>, paidSelected: Bool, freeSelected: Bool, includedSelected: Bool, excludedSelected: Bool, minAge: String, maxAge: String, minTeamSize: String, maxTeamSize: String) {
         filters.types = types
         filters.locationTypes = locationTypes
@@ -30,18 +20,6 @@ import SwiftUI
         filters.maxAge = !maxAge.isEmpty ? Int(maxAge) : nil
         filters.minTeamSize = !minTeamSize.isEmpty ? Int(minTeamSize) : nil
         filters.maxTeamSize = !maxTeamSize.isEmpty ? Int(maxTeamSize) : nil
-    }
-
-    func resetFilters() {
-        types.removeAll()
-        locationTypes.removeAll()
-        educationStatuses.removeAll()
-        entryFee = nil
-        prizePool = nil
-        minAge = nil
-        maxAge = nil
-        minTeamSize = nil
-        maxTeamSize = nil
     }
     
     private func getBoolValueOrNil(condition1: Bool, condition2: Bool) -> Bool? {
