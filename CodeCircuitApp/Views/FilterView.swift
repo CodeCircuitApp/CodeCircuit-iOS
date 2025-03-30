@@ -64,12 +64,8 @@ struct FilterView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         showFilterView = false
-                        
                         pushToViewModel()
-                        
                         action()
-                        
-                        print(viewModel.types)
                     } label: {
                         Text("Apply")
                             .bold()
