@@ -45,72 +45,13 @@ struct FilterView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("Event Type").font(.headline)) {
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                        ForEach(Event.EventType.allCases, id: \.self) { type in
-                            FilterButton(text: type.rawValue, action: {
-                                toggleFilter(type, in: &types)
-                            }, selected: types.contains(type))
-                        }
-                    }
-                    .listRowBackground(Color.clear)
-                }
-                Section(header: Text("Location Types").font(.headline)) {
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                        ForEach(Event.LocationType.allCases, id: \.self) { type in
-                            FilterButton(text: type.rawValue, action: {
-                                toggleFilter(type, in: &locationTypes)
-                            }, selected: locationTypes.contains(type))
-                        }
-                    }
-                    .listRowBackground(Color.clear)
-                }
-                Section(header: Text("Education Status Eligibility").font(.headline)) {
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                        ForEach(Event.EducationStatus.allCases, id: \.self) { type in
-                            FilterButton(text: EligibilityLabel.filterEligibleLabel(type), action: {
-                                toggleFilter(type, in: &educationStatuses)
-                            }, selected: educationStatuses.contains(type))
-                        }
-                    }
-                    .listRowBackground(Color.clear)
-                }
-                Section(header: Text("Entry Fee").font(.headline)) {
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                        FilterButton(text: "free", action: {
-                            freeSelected.toggle()
-                        }, selected: freeSelected)
-                        FilterButton(text: "paid", action: {
-                            paidSelected.toggle()
-                        }, selected: paidSelected)
-                    }
-                    .listRowBackground(Color.clear)
-                }
-                Section(header: Text("Prize Pool").font(.headline)) {
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                        FilterButton(text: "included", action: {
-                            includedSelected.toggle()
-                        }, selected: includedSelected)
-                        FilterButton(text: "excluded", action: {
-                            excludedSelected.toggle()
-                        }, selected: excludedSelected)
-                    }
-                    .listRowBackground(Color.clear)
-                }
-                Section(header: Text("Age Restrictions").font(.headline)) {
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                        NumberField(name: "Min", value: $minAge)
-                        NumberField(name: "Max", value: $maxAge)
-                    }
-                    .listRowBackground(Color.clear)
-                }
-                Section(header: Text("Team Size Restrictions").font(.headline)) {
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
-                        NumberField(name: "Min", value: $minSize)
-                        NumberField(name: "Max", value: $maxSize)
-                    }
-                    .listRowBackground(Color.clear)
-                }
+                eventTypeSection
+                locationTypeSection
+                educationStatusSection
+                entryFeeSection
+                prizePoolSection
+                ageRestrictionsSection
+                teamSizeSection
             }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -144,6 +85,80 @@ struct FilterView: View {
                     }
                 }
             }
+        }
+    }
+    
+    // MARK: - Sections
+    
+    private var eventTypeSection: some View {
+        FilterSection(header: "Event Type", items: Event.EventType.allCases) { type in
+            FilterButton(text: type.rawValue, action: {
+                toggleFilter(type, in: &types)
+            }, selected: types.contains(type))
+        }
+    }
+    
+    private var locationTypeSection: some View {
+        FilterSection(header: "Location Type", items: Event.LocationType.allCases) { type in
+            FilterButton(text: type.rawValue, action: {
+                toggleFilter(type, in: &locationTypes)
+            }, selected: locationTypes.contains(type))
+        }
+    }
+    
+    private var educationStatusSection: some View {
+        FilterSection(header: "Education Status Eligibility", items: Event.EducationStatus.allCases) { type in
+            FilterButton(text: EligibilityLabel.filterEligibleLabel(type), action: {
+                toggleFilter(type, in: &educationStatuses)
+            }, selected: educationStatuses.contains(type))
+        }
+    }
+    
+    private var entryFeeSection: some View {
+        Section(header: Text("Entry Fee").font(.headline)) {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                FilterButton(text: "free", action: {
+                    freeSelected.toggle()
+                }, selected: freeSelected)
+                FilterButton(text: "paid", action: {
+                    paidSelected.toggle()
+                }, selected: paidSelected)
+            }
+            .listRowBackground(Color.clear)
+        }
+    }
+    
+    private var prizePoolSection: some View {
+        Section(header: Text("Prize Pool").font(.headline)) {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                FilterButton(text: "included", action: {
+                    includedSelected.toggle()
+                }, selected: includedSelected)
+                FilterButton(text: "excluded", action: {
+                    excludedSelected.toggle()
+                }, selected: excludedSelected)
+            }
+            .listRowBackground(Color.clear)
+        }
+    }
+    
+    private var ageRestrictionsSection: some View {
+        Section(header: Text("Age Restrictions").font(.headline)) {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                NumberField(name: "Min", value: $minAge)
+                NumberField(name: "Max", value: $maxAge)
+            }
+            .listRowBackground(Color.clear)
+        }
+    }
+    
+    private var teamSizeSection: some View {
+        Section(header: Text("Team Size Restrictions").font(.headline)) {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                NumberField(name: "Min", value: $minSize)
+                NumberField(name: "Max", value: $maxSize)
+            }
+            .listRowBackground(Color.clear)
         }
     }
     
@@ -193,6 +208,26 @@ struct FilterView: View {
         }
     }
 }
+
+// MARK: - Helper View
+
+struct FilterSection<T: Hashable, Content: View>: View {
+    let header: String
+    let items: [T]
+    let content: (T) -> Content
+    
+    var body: some View {
+        Section(header: Text(header).font(.headline)) {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())]) {
+                ForEach(items, id: \.self) { item in
+                    content(item)
+                }
+            }
+        }
+        .listRowBackground(Color.clear)
+    }
+}
+
 //
 //#Preview {
 //    @Previewable @State var isPresented = true
