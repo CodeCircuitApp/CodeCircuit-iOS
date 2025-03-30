@@ -48,19 +48,19 @@ struct Filters {
         }
         
         if let minAge = minAge {
-            queryItems.append(URLQueryItem(name: "minAge", value: String(minAge)))
+            queryItems.append(URLQueryItem(name: "minimumAge", value: String(minAge)))
         }
 
         if let maxAge = maxAge {
-            queryItems.append(URLQueryItem(name: "maxAge", value: String(maxAge)))
+            queryItems.append(URLQueryItem(name: "maximumAge", value: String(maxAge)))
         }
 
         if let minTeamSize = minTeamSize {
-            queryItems.append(URLQueryItem(name: "minTeamSize", value: String(minTeamSize)))
+            queryItems.append(URLQueryItem(name: "minimumTeamSize", value: String(minTeamSize)))
         }
 
         if let maxTeamSize = maxTeamSize {
-            queryItems.append(URLQueryItem(name: "maxTeamSize", value: String(maxTeamSize)))
+            queryItems.append(URLQueryItem(name: "maximumTeamSize", value: String(maxTeamSize)))
         }
         
         return queryItems
