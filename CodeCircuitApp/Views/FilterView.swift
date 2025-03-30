@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct FilterView: View {
-//    @Environment(EventFilterViewModel.self) private var viewModel
     private var viewModel: EventFilterViewModel
     @State private var types: Set<Event.EventType>
     @State private var locationTypes: Set<Event.LocationType>
@@ -135,6 +134,15 @@ struct FilterView: View {
                             .bold()
                     }
                 }
+                ToolbarItem(placement: .keyboard) {
+                    HStack {
+                        Spacer()
+                        Button("Ok") {
+                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        }
+                        .bold()
+                    }
+                }
             }
         }
     }
@@ -188,7 +196,7 @@ struct FilterView: View {
 //
 //#Preview {
 //    @Previewable @State var isPresented = true
-//    
+//
 //    FilterView(showFilterView: $isPresented, action: { print("Action") })
 //        .environment(EventFilterViewModel())
 //}
