@@ -17,7 +17,7 @@ struct ContentView: View {
                 EventListView(events: eventViewModel.events)
             }
             Tab("Map", systemImage: "map") {
-                MapView()
+                MapView(events: eventViewModel.events)
             }
         }
         .alert(isPresented: .constant(eventViewModel.hasError)) {
