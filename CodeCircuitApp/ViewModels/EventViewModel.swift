@@ -38,6 +38,26 @@ import SwiftUI
         }
     }
     
+    func fetchAllEvents() {
+        isFetching = true
+        Task {
+            print("Fetching")
+            await NetworkManager.shared.getAllEvents { result in
+                switch result {
+                case .success(let events):
+                    print("fetched")
+                    self.events = events
+                    self.gotAllEvents = true
+                    self.saveEvents()
+                    print(self.events.count)
+                case .failure(let error):
+                    self.networkError = error
+                    self.loadEvents()
+                }
+            }
+        }
+    }
+    
     func saveEvents() {
         do {
             let data = try JSONEncoder().encode(events)

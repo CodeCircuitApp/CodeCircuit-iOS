@@ -22,6 +22,9 @@ struct MapView: View {
                 }
             }
         }
+        .onAppear {
+            eventViewModel.fetchAllEvents()
+        }
     }
 }
 
