@@ -15,19 +15,34 @@ struct MapView: View {
     let initialPosition: MapCameraPosition = MapCameraPosition.camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: 51.919400, longitude: 19.145100), distance: 1500000))
     
     var body: some View {
-        Map(initialPosition: initialPosition) {
-            ForEach(events) { event in
-                if let latitude = event.latitude, let longitude = event.longitude {
-                    Marker(event.name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))
+        NavigationStack {
+            Map(initialPosition: initialPosition) {
+                ForEach(events) { event in
+                    if let latitude = event.latitude, let longitude = event.longitude {
+                        Annotation(event.name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude)) {
+                            NavigationLink(value: event) {
+                                 VStack(spacing: 4) {
+                                     Image(systemName: "mappin.circle.fill")
+                                         .resizable()
+                                         .frame(width: 30, height: 30)
+                                         .foregroundColor(.red)
+                                 }
+                             }
+                        }
+                    }
                 }
             }
-        }
-        .onAppear {
-            eventViewModel.fetchAllEvents()
+            .navigationDestination(for: Event.self) { event in
+                EventView(event: event)
+            }
+            .onAppear {
+                eventViewModel.fetchAllEvents()
+            }
         }
     }
 }
 
 #Preview {
     MapView(events: Event.mockEvents)
+        .environment(EventViewModel())
 }
