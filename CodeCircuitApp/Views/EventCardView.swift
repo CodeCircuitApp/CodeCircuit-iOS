@@ -13,10 +13,14 @@ struct EventCardView: View {
     var body: some View {
         VStack {
             HStack {
-                Image(.placeholderEvent)
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .padding(4)
+                AsyncImage(url: event.logoUrl) { phase in
+                    if let image = phase.image {
+                        image
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .padding(4)
+                    }
+                }
                 VStack(alignment: .leading) {
                     Text(event.name)
                         .font(.headline)
