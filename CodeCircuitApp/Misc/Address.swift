@@ -12,5 +12,9 @@ struct Address: Equatable, Hashable, Codable {
     var city: String?
     var state: String? // Also province, region, voivoideship
     var postalCode: String?
-    var country: String? 
+    var country: String?
+    
+    func joined() -> String {
+        return "\(street!), \(city!), \(state!), \(country!)"
+    }
 }

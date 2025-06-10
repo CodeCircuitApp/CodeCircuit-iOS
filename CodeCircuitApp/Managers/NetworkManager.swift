@@ -13,7 +13,7 @@ class NetworkManager {
     private init() {}
     
     func getEvents(sizePerPage: Int, page: Int, filters: Filters, completion: @escaping (Result<[Event], CCError>) -> Void) async {
-        guard var url = URL(string: "http://localhost:3000/events?size=\(sizePerPage)&page=\(page)") else {
+        guard var url = URL(string: "http://192.168.0.194:3000/events?size=\(sizePerPage)&page=\(page)") else {
             completion(.failure(.invalidUrl))
             return
         }
@@ -71,7 +71,7 @@ class NetworkManager {
     }
     
     func getAllEvents(completion: @escaping (Result<[Event], CCError>) -> Void) async {
-        guard let url = URL(string: "http://localhost:3000/events?size=1000") else {
+        guard let url = URL(string: "http://192.168.0.194:3000/events?size=1000") else {
             completion(.failure(.invalidUrl))
             return
         }

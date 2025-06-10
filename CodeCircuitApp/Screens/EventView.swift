@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct EventView: View {
+    let viewModel = EventViewViewModel()
+    
     let event: Event
     
     var body: some View {
@@ -95,6 +97,7 @@ struct EventView: View {
             EventActionButton(systemName: "safari", text: "Website", action: { openWebsite(url: event.website) })
             EventActionButton(systemName: "envelope", text: "E-mail", action: { print("Call") })
             EventActionButton(systemName: "square.and.arrow.up", text: "Share", action: { print("Call") })
+            EventActionButton(systemName: "calendar.badge.plus", text: "Save", action: { viewModel.saveToCalendar(event: event) })
         }
     }
     
