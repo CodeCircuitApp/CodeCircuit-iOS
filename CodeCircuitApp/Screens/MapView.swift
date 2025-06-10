@@ -10,9 +10,12 @@ import MapKit
 
 struct MapView: View {
     @Environment(EventViewModel.self) private var eventViewModel: EventViewModel
+    @State private var eventFilterViewModel = EventFilterViewModel()
     let events: [Event]
     let coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 52.240225, longitude: 21.018661)
     let initialPosition: MapCameraPosition = MapCameraPosition.camera(MapCamera(centerCoordinate: CLLocationCoordinate2D(latitude: 51.919400, longitude: 19.145100), distance: 1500000))
+    @State var showFilterView = false
+    @State var viewDidLoad = false
     
     var body: some View {
         NavigationStack {
@@ -32,11 +35,30 @@ struct MapView: View {
                     }
                 }
             }
+            .sheet(isPresented: $showFilterView) {
+                FilterView(showFilterView: $showFilterView, viewModel: eventFilterViewModel) {
+                    eventViewModel.events.removeAll()
+                    eventViewModel.fetchEvents(sizePerPage: 1000, page: nil, filters: eventFilterViewModel.filters)
+                }
+                .presentationDetents([.medium])
+            }
             .navigationDestination(for: Event.self) { event in
                 EventView(event: event)
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showFilterView = true
+                    } label: {
+                        Image(systemName: "slider.horizontal.3")
+                    }
+                }
+            }
             .onAppear {
-                eventViewModel.fetchAllEvents()
+                if !viewDidLoad {
+                    eventViewModel.fetchAllEvents()
+                    viewDidLoad = true
+                }
             }
         }
     }

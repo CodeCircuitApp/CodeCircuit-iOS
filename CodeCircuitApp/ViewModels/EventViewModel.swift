@@ -17,16 +17,18 @@ import SwiftUI
         return networkError != nil
     }
     
-    func fetchEvents(sizePerPage: Int, page: Binding<Int>, filters: Filters) {
+    func fetchEvents(sizePerPage: Int, page: Binding<Int>?, filters: Filters) {
         isFetching = true
         Task {
-            await NetworkManager.shared.getEvents(sizePerPage: sizePerPage, page: page.wrappedValue, filters: filters) { result in
+            await NetworkManager.shared.getEvents(sizePerPage: sizePerPage, page: page != nil ? page!.wrappedValue : 0, filters: filters) { result in
                 switch result {
                 case .success(let events):
                     if events.count < sizePerPage {
                         self.gotAllEvents = true
                     }
-                    page.wrappedValue += 1
+                    if page != nil {
+                        page!.wrappedValue += 1
+                    }
                     self.events.append(contentsOf: events)
                     self.saveEvents()
                 case .failure(let error):
