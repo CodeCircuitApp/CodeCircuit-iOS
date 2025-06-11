@@ -14,11 +14,10 @@ import EventKitUI
         
         let calendarEvent = EKEvent(eventStore: store)
         calendarEvent.title = event.name
+        calendarEvent.isAllDay = true
         calendarEvent.startDate = event.date
         calendarEvent.endDate = event.date
-        calendarEvent.isAllDay = true
         calendarEvent.url = event.website
-        calendarEvent.timeZone = .current
         calendarEvent.location = event.address?.joined()
         calendarEvent.notes = event.description
         
