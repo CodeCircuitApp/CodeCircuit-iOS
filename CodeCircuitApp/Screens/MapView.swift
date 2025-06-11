@@ -25,10 +25,12 @@ struct MapView: View {
                         Annotation(event.name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude)) {
                             NavigationLink(value: event) {
                                  VStack(spacing: 4) {
-                                     Image(systemName: "mappin.circle.fill")
+                                     Image(systemName: "star.circle")
                                          .resizable()
                                          .frame(width: 30, height: 30)
                                          .foregroundColor(.red)
+                                         .background(.white)
+                                         .clipShape(.circle)
                                  }
                              }
                         }
