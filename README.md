@@ -7,17 +7,17 @@ Events can be saved to calendar.
 ## Screenshots
 
 <p>
-  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-13%20at%2021.07.59.png" width="300" />
-  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-13%20at%2021.08.45.png" width="300" />
-  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-13%20at%2021.08.58.png" width="300" />
+  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-13%20at%2021.07.59.png" width="200" />
+  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-13%20at%2021.08.45.png" width="200" />
+  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-13%20at%2021.08.58.png" width="200" />
 </p>
 <p>
-  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-12%20at%2000.02.36.png" width="300" />
-  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-12%20at%2000.02.48.png" width="300" />
-  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-12%20at%2000.03.17.png" width="300" />
+  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-12%20at%2000.02.36.png" width="200" />
+  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-12%20at%2000.02.48.png" width="200" />
+  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-12%20at%2000.03.17.png" width="200" />
 </p>
 <p>
-  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-11%20at%2023.43.58.png" width="300" />
-  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-11%20at%2023.47.43.png" width="300" />
-  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-11%20at%2023.48.24.png" width="300" />
+  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-11%20at%2023.43.58.png" width="200" />
+  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-11%20at%2023.47.43.png" width="200" />
+  <img src="https://raw.githubusercontent.com/jmalinkiewicz/images/refs/heads/main/Simulator%20Screenshot%20-%20iPhone%2016%20Pro%20-%202025-06-11%20at%2023.48.24.png" width="200" />
 </p>
