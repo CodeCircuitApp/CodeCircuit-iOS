@@ -13,7 +13,7 @@ class NetworkManager {
     private init() {}
     
     func getEvents(sizePerPage: Int, page: Int, filters: Filters, completion: @escaping (Result<[Event], CCError>) -> Void) async {
-        guard var url = URL(string: "http://192.168.0.194:3000/events?size=\(sizePerPage)&page=\(page)") else {
+        guard var url = URL(string: "http://localhost:3000/events?size=\(sizePerPage)&page=\(page)") else {
             completion(.failure(.invalidUrl))
             return
         }
@@ -122,6 +122,12 @@ class NetworkManager {
             }
             completion(.failure(.unknown))
         }
+    }
+    
+    func retrieveImage(_ imgUrl: URL) async throws -> Data {
+        let (data, _) = try await URLSession.shared.data(from: imgUrl)
+        
+        return data
     }
 }
 
