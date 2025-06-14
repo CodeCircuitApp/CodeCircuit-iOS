@@ -13,14 +13,28 @@ struct EventCardView: View {
     var body: some View {
         VStack {
             HStack {
-                AsyncImage(url: event.logoUrl) { phase in
-                    if let image = phase.image {
+                CachedImage(url: event.logoUrl) { phase in
+                    switch phase {
+                    case .empty:
+                        ProgressView()
+                            .frame(width: 50, height: 50)
+                            .padding(4)
+                    case .success(let image):
                         image
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .padding(4)
+                            .frame(width: 50, height: 50)
+                            .padding(4)
+                    case .failure(let error):
+                        Image(systemName: "questionmark.circle.fill")
+                            .foregroundStyle(.gray)
+                            .frame(width: 50, height: 50)
+                            .padding(4)
+                    @unknown default:
+                        EmptyView()
                     }
+                    
                 }
+//                    .frame(width: 50, height: 50)
+//                    .padding(4)
                 VStack(alignment: .leading) {
                     Text(event.name)
                         .font(.headline)
@@ -42,10 +56,6 @@ struct EventCardView: View {
 }
 
 #Preview {
-    List {
-        EventCardView(event: Event.mockEvents[0])
-        EventCardView(event: Event.mockEvents[1])
-        EventCardView(event: Event.mockEvents[2])
-        EventCardView(event: Event.mockEvents[3])
-    }
+    ContentView()
+        .environment(EventViewModel())
 }
