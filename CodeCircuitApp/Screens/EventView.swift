@@ -36,10 +36,25 @@ struct EventView: View {
     
     var headerArea: some View {
         ZStack(alignment: .bottomLeading) {
-            Image(.mockEvent)
-                .resizable()
-                .scaledToFill()
-                .frame(width: UIScreen.main.bounds.width)
+            CachedImage(url: event.imageUrl) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .frame(width: UIScreen.main.bounds.width, height: 100)
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: UIScreen.main.bounds.width)
+                case .failure(_):
+                    Image(.mockEvent)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: UIScreen.main.bounds.width)
+                @unknown default:
+                    EmptyView()
+                }
+            }
             dateLabel
             ZStack(alignment: .bottom) {
                 Rectangle()

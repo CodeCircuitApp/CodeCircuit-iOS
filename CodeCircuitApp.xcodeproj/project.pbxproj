@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		998A5CDF2DFE22EE002C381C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 998A5CDE2DFE22EE002C381C /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		99C78DFA2D88BB710077C538 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		998A5CDE2DFE22EE002C381C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		99C78DE92D88BB6F0077C538 /* CodeCircuitApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodeCircuitApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99C78DF92D88BB710077C538 /* CodeCircuitAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodeCircuitAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		99C78E032D88BB710077C538 /* CodeCircuitAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CodeCircuitAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +84,7 @@
 				99C78DFC2D88BB710077C538 /* CodeCircuitAppTests */,
 				99C78E062D88BB710077C538 /* CodeCircuitAppUITests */,
 				99C78DEA2D88BB6F0077C538 /* Products */,
+				998A5CDE2DFE22EE002C381C /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,6 +220,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				998A5CDF2DFE22EE002C381C /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

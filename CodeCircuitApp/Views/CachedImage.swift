@@ -21,7 +21,7 @@ struct CachedImage<Content: View>: View {
                 content(.failure(error))
             case .success(let data):
                 if let image = UIImage(data: data) {
-                    content(.success(Image(uiImage: image)))
+                    content(.success(Image(uiImage: image).resizable()))
                 } else {
                     content(.failure(CachedImageError.invalidData))
                 }

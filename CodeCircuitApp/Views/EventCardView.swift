@@ -23,7 +23,7 @@ struct EventCardView: View {
                         image
                             .frame(width: 50, height: 50)
                             .padding(4)
-                    case .failure(let error):
+                    case .failure(_):
                         Image(systemName: "questionmark.circle.fill")
                             .foregroundStyle(.gray)
                             .frame(width: 50, height: 50)
