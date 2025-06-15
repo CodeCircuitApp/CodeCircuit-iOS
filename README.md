@@ -1,6 +1,10 @@
 # CodeCircuit iOS App
 
-An app for browsing all kinds of tech related events. Data is fetched from a remote HTTP server and cached in device's local storage. In case of a network error, an alert is dispatched and cached data is displayed. The event list implements endless scrolling. Events can also be browsed using a map. Tapping on an event marker on the map redirects to the event view. 
+An app for browsing all kinds of tech related events. Data is fetched from a remote HTTP server and cached in device's local storage. In case of a network error, an alert is dispatched and cached data is displayed. The event list implements endless scrolling. Events can also be browsed using a map. Tapping on an event marker on the map redirects to the event view.
+
+### Image Caching
+
+A custom view called ```CachedView``` has been implemented, along with a ```CachedImageManager``` and ```ImageCache``` singleton. Every downloaded image is cached in Foundation's ```NSCache``` collection. ```ImageCache``` has a maximum count limit of 100 and maximum total size limit of 50MB. 
 
 Events can be saved to calendar.
 
