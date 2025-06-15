@@ -6,7 +6,9 @@ An app for browsing all kinds of tech related events. Data is fetched from a rem
 
 A custom view called ```CachedView``` has been implemented, along with a ```CachedImageManager``` and ```ImageCache``` singleton. Every downloaded image is cached in Foundation's ```NSCache``` collection. ```ImageCache``` has a maximum count limit of 100 and maximum total size limit of 50MB. 
 
-Events can be saved to calendar.
+### Saving to calendar
+
+Every event can be saved to calendar using ```EKEventEditViewController()```. Upon clicking **Save** button, a event edit view controller is presented modally, allowing users to save an event to a calendar of their choice. Created event contains related information such as description, location and website URL. 
 
 ## Screenshots
 
