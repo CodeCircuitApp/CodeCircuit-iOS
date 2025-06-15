@@ -8,7 +8,11 @@ A custom view called ```CachedView``` has been implemented, along with a ```Cach
 
 ### Saving to calendar
 
-Every event can be saved to calendar using ```EKEventEditViewController()```. Upon clicking **Save** button, a event edit view controller is presented modally, allowing users to save an event to a calendar of their choice. Created event contains related information such as description, location and website URL. 
+Every event can be saved to calendar using ```EKEventEditViewController()```. Upon clicking **Save** button, a event edit view controller is presented modally, allowing users to save an event to a calendar of their choice. Created event contains related information such as description, location and website URL.
+
+### Browsing with a map
+
+In addition to browsing through a list, users can browse using a map. In the ```TabView``` there's a **Map** tab, upon clicking a ```MapView``` is displayed, with initial ```MapCameraPosition``` set to outzoomed center of Poland. On the map, events are represented with SwiftUI's ```Annotation()```, with content set to a star icon and name label. Events can be filtered, using the same modal view as in the explore tab. Tapping on an annotation navigates to the selected event screen. 
 
 ## Screenshots
 
