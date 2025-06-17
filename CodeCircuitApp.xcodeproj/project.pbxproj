@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		995AC8E92E02123F004A53B5 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 995AC8E82E02123F004A53B5 /* FirebaseAnalytics */; };
+		995AC8EC2E02164E004A53B5 /* GoogleTagManager in Frameworks */ = {isa = PBXBuildFile; productRef = 995AC8EB2E02164E004A53B5 /* GoogleTagManager */; };
 		998A5CDF2DFE22EE002C381C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 998A5CDE2DFE22EE002C381C /* README.md */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		995AC8EF2E021731004A53B5 /* container */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = container;
+			sourceTree = "<group>";
+		};
 		99C78DEB2D88BB6F0077C538 /* CodeCircuitApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = CodeCircuitApp;
@@ -58,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				995AC8EC2E02164E004A53B5 /* GoogleTagManager in Frameworks */,
 				995AC8E92E02123F004A53B5 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,6 +89,7 @@
 		99C78DE02D88BB6F0077C538 = {
 			isa = PBXGroup;
 			children = (
+				995AC8EF2E021731004A53B5 /* container */,
 				99C78DEB2D88BB6F0077C538 /* CodeCircuitApp */,
 				99C78DFC2D88BB710077C538 /* CodeCircuitAppTests */,
 				99C78E062D88BB710077C538 /* CodeCircuitAppUITests */,
@@ -116,11 +124,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				995AC8EF2E021731004A53B5 /* container */,
 				99C78DEB2D88BB6F0077C538 /* CodeCircuitApp */,
 			);
 			name = CodeCircuitApp;
 			packageProductDependencies = (
 				995AC8E82E02123F004A53B5 /* FirebaseAnalytics */,
+				995AC8EB2E02164E004A53B5 /* GoogleTagManager */,
 			);
 			productName = CodeCircuitApp;
 			productReference = 99C78DE92D88BB6F0077C538 /* CodeCircuitApp.app */;
@@ -206,6 +216,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				995AC8E72E02123F004A53B5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				995AC8EA2E02164E004A53B5 /* XCRemoteSwiftPackageReference "google-tag-manager-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 99C78DEA2D88BB6F0077C538 /* Products */;
@@ -579,6 +590,14 @@
 				minimumVersion = 11.14.0;
 			};
 		};
+		995AC8EA2E02164E004A53B5 /* XCRemoteSwiftPackageReference "google-tag-manager-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleanalytics/google-tag-manager-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -586,6 +605,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 995AC8E72E02123F004A53B5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalytics;
+		};
+		995AC8EB2E02164E004A53B5 /* GoogleTagManager */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 995AC8EA2E02164E004A53B5 /* XCRemoteSwiftPackageReference "google-tag-manager-ios-sdk" */;
+			productName = GoogleTagManager;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
